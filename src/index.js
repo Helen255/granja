@@ -6,8 +6,10 @@ app.set('port', process.env.PORT || 3000);
 
 
 //Middlwares funciones ejecutables antes que las petiicones llequen al servidor
+app.use(express.json());
 
 //Rutas
+app.use(require('./routes/route'));
  
 
 //Inicializando servidor
