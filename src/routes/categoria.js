@@ -3,7 +3,7 @@ const mysqlConnection = require('../database');
 const router = express.Router();
 
 
-
+//Peticioens get
 router.get('/',(req, res) => {
     mysqlConnection.query('SELECT * FROM categoria', (err, rows, fields ) => {
         if(!err) {
@@ -14,7 +14,7 @@ router.get('/',(req, res) => {
     });
 });
 
-
+//peticiones post
 router.post('/', (req, res) => {
     const { id, nombre, descripcion } = req.body;
     const query = ` 
@@ -31,6 +31,7 @@ router.post('/', (req, res) => {
     });
 });
 
+//Peticiones de actualización
 router.put('/:id', (req, res) => {
    const {nombre, descripcion} = req.body;
    const { id } = req.params;
@@ -44,7 +45,8 @@ router.put('/:id', (req, res) => {
    });
 });
 
-router.delete('id', (req, res) => {
+//Peticiones de eliminación
+router.delete('/:id', (req, res) => {
     const { id } = req.params;
     mysqlConnection.query('DELETE FROM categoria WHERE id = ?', [id], (err, rows, fields) => {
         if (!err) {

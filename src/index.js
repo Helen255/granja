@@ -9,7 +9,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.json());
 
 //Rutas
-app.use(require('./routes/route'));
+app.use(require('./routes/categoria'));
  
 
 //Inicializando servidor
