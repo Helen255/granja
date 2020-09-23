@@ -31,5 +31,19 @@ router.post('/', (req, res) => {
     });
 });
 
+//Peticiones de actualización
+router.put('/:id', (req, res) => {
+   const {nombre, fase, precio, total} = req.body;
+   const { id } = req.params;
+   const query= 'CALL consumoAves(?, ?, ?, ?, ?)';
+   mysqlConnection.query(query, [id, nombre, fase, precio, total], (err, rows, fields) => {
+       if(!err) {
+           res.json({Status: 'Consumo  actualizado'});
+       }else {
+           console.log(err);
+       }
+   });
+});
+
 
 module.exports = router;
