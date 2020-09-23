@@ -14,5 +14,22 @@ router.get('/',(req, res) => {
     });
 });
 
+//peticiones post
+router.post('/', (req, res) => {
+    const { id, nombre, fase, precio, total } = req.body;
+    const query = ` 
+    CALL consumoAves(?, ?, ?, ?, ?);
+    `;
+    mysqlConnection.query(query, [id, nombre, fase, precio, total], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Consumo guardado'});
+        }else {
+            console.log(err);
+        }
+
+
+    });
+});
+
 
 module.exports = router;
