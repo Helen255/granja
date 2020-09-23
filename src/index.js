@@ -10,7 +10,7 @@ app.use(express.json());
 
 //Rutas
 app.use(require('./routes/categoria'));
- 
+app.use(require('./routes/consumo'));
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {
