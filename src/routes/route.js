@@ -44,5 +44,14 @@ router.put('/:id', (req, res) => {
    });
 });
 
-
+router.delete('id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM categoria WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Categoria eliminada'});
+        }else {
+            console.log(err);
+        }
+    });
+});
 module.exports = router;
