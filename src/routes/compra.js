@@ -16,11 +16,11 @@ router.get('/compra',(req, res) => {
 
 //peticiones post
 router.post('/compra', (req, res) => {
-    const { id, descipcion, numero_aves, precio, fecha_compra, total } = req.body;
+    const { id, descripcion, numero_aves, precio, fecha_compra, total } = req.body;
     const query = ` 
-    CALL consumoAves(?, ?, ?, ?, ?, ?);
+    CALL comprasAves(?, ?, ?, ?, ?, ?);
     `;
-    mysqlConnection.query(query, [id, descipcion, numero_aves, precio, fecha_compra, total], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, descripcion, numero_aves, precio, fecha_compra, total], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Compra guardada'});
         }else {
