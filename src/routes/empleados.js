@@ -16,11 +16,11 @@ router.get('/empleados',(req, res) => {
 
 //peticiones post
 router.post('/empleados', (req, res) => {
-    const { id, dpi, puesto, usuario_id } = req.body;
+    const { id, nombre, dpi, puesto, usuario_id } = req.body;
     const query = ` 
-    CALL empleados(?, ?, ?, ?);
+    CALL empleados(?, ?, ?, ?, ?);
     `;
-    mysqlConnection.query(query, [id, dpi, puesto, usuario_id], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, nombre, dpi, puesto, usuario_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Empleado guardado'});
         }else {
@@ -31,4 +31,18 @@ router.post('/empleados', (req, res) => {
     });
 });
 
+//Peticiones put
+router.put('/empleados/:id', (req, res) => {
+    const {nombre, dpi, puesto, usuario_id} = req.body;
+    const { id } = req.params;
+    const query= 'CALL consumoAves(?, ?, ?, ?, ?)';
+    mysqlConnection.query(query, [id, nombre, dpi, puesto, usuario_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Empleado  actualizado'});
+        }else {
+            console.log(err);
+        }
+    });
+ });
+ 
 module.exports = router;
