@@ -31,4 +31,19 @@ router.post('/compra', (req, res) => {
     });
 });
 
+//Peticiones de put
+router.put('/compra/:id', (req, res) => {
+    const {descripcion, numero_aves, precio, fecha_compra, total} = req.body;
+    const { id } = req.params;
+    const query= 'CALL comprasAves(?, ?, ?, ?, ?, ?)';
+    mysqlConnection.query(query, [id, descripcion, numero_aves, precio, fecha_compra, total], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Compra  actualizada'});
+        }else {
+            console.log(err);
+        }
+    });
+ });
+
+ 
 module.exports = router;
