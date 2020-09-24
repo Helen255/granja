@@ -20,7 +20,7 @@ router.post('/empleados', (req, res) => {
     const query = ` 
     CALL empleados(?, ?, ?, ?, ?);
     `;
-    mysqlConnection.query(query, [id, nombre, dpi, puesto, usuario_id], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, dpi, puesto, nombre, usuario_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Empleado guardado'});
         }else {
@@ -33,10 +33,10 @@ router.post('/empleados', (req, res) => {
 
 //Peticiones put
 router.put('/empleados/:id', (req, res) => {
-    const {nombre, dpi, puesto, usuario_id} = req.body;
+    const {dpi, nombre, puesto, usuario_id} = req.body;
     const { id } = req.params;
-    const query= 'CALL consumoAves(?, ?, ?, ?, ?)';
-    mysqlConnection.query(query, [id, nombre, dpi, puesto, usuario_id], (err, rows, fields) => {
+    const query= 'CALL empleados(?, ?, ?, ?, ?)';
+    mysqlConnection.query(query, [id, dpi, puesto, nombre, usuario_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Empleado  actualizado'});
         }else {
@@ -44,5 +44,17 @@ router.put('/empleados/:id', (req, res) => {
         }
     });
  });
- 
+
+ //Peticiones delete
+router.delete('/empleados/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM empleado WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Empleado eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
+
 module.exports = router;
