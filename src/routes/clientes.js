@@ -44,6 +44,19 @@ router.put('/clientes/:id', (req, res) => {
         }
     });
  });
+
+ //Peticiones delete
+router.delete('/clientes/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM cliente WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Cliente eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
+
  
 
 module.exports = router;
