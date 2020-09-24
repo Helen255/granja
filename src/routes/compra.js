@@ -45,5 +45,18 @@ router.put('/compra/:id', (req, res) => {
     });
  });
 
+
+ //Peticiones delete
+router.delete('/conmpra/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM compra_aves WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Dato compra eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
+
  
 module.exports = router;
