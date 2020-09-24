@@ -35,7 +35,7 @@ router.post('/usuarios', (req, res) => {
 router.put('/usuarios/:id', (req, res) => {
     const {usuario, contrasenia} = req.body;
     const { id } = req.params;
-    const query= 'CALL consumoAves(?, ?, ?)';
+    const query= 'CALL usuarios(?, ?, ?)';
     mysqlConnection.query(query, [id, usuario, contrasenia], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Usuario  actualizado'});
@@ -44,5 +44,17 @@ router.put('/usuarios/:id', (req, res) => {
         }
     });
  });
+
+ //Peticiones delete
+router.delete('/usuarios/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM usuario WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Usuario eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
 
 module.exports = router;
