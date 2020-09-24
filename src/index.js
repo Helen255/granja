@@ -13,7 +13,7 @@ app.use(require('./routes/categoria'));
 app.use(require('./routes/consumo'));
 app.use(require('./routes/compra'));
 app.use(require('./routes/usuarios'));
-
+app.use(require('./routes/empleados'));
 //Inicializando servidor
 app.listen(app.get('port'), () => {
     console.log('Servidor corriendo en el puerto', app.get('port'));
