@@ -14,4 +14,21 @@ router.get('/empleados',(req, res) => {
     });
 });
 
+//peticiones post
+router.post('/empleados', (req, res) => {
+    const { id, dpi, puesto, usuario_id } = req.body;
+    const query = ` 
+    CALL empleados(?, ?, ?, ?);
+    `;
+    mysqlConnection.query(query, [id, dpi, puesto, usuario_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Empleado guardado'});
+        }else {
+            console.log(err);
+        }
+
+
+    });
+});
+
 module.exports = router;
