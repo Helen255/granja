@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 //Peticioens get
-router.get('/',(req, res) => {
+router.get('/consumo',(req, res) => {
     mysqlConnection.query('SELECT * FROM consumo_aves', (err, rows, fields ) => {
         if(!err) {
             res.json(rows);
@@ -15,12 +15,12 @@ router.get('/',(req, res) => {
 });
 
 //peticiones post
-router.post('/', (req, res) => {
-    const { id, nombre, fase, precio, total } = req.body;
+router.post('/consumo', (req, res) => {
+    const { id, nombre, fase, precio, cantidad, total } = req.body;
     const query = ` 
-    CALL consumoAves(?, ?, ?, ?, ?);
+    CALL consumoAves(?, ?, ?, ?, ?, ?);
     `;
-    mysqlConnection.query(query, [id, nombre, fase, precio, total], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, nombre, fase, precio, cantidad, total], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Consumo guardado'});
         }else {
@@ -32,11 +32,11 @@ router.post('/', (req, res) => {
 });
 
 //Peticiones de actualización
-router.put('/:id', (req, res) => {
-   const {nombre, fase, precio, total} = req.body;
+router.put('/consumo/:id', (req, res) => {
+   const {nombre, fase, precio, cantidad, total} = req.body;
    const { id } = req.params;
-   const query= 'CALL consumoAves(?, ?, ?, ?, ?)';
-   mysqlConnection.query(query, [id, nombre, fase, precio, total], (err, rows, fields) => {
+   const query= 'CALL consumoAves(?, ?, ?, ?, ?, ?)';
+   mysqlConnection.query(query, [id, nombre, fase, precio, cantidad, total], (err, rows, fields) => {
        if(!err) {
            res.json({Status: 'Consumo  actualizado'});
        }else {
@@ -46,7 +46,7 @@ router.put('/:id', (req, res) => {
 });
 
 //Peticiones de eliminación
-router.delete('/:id', (req, res) => {
+router.delete('/consumo/:id', (req, res) => {
     const { id } = req.params;
     mysqlConnection.query('DELETE FROM consumo_aves WHERE id = ?', [id], (err, rows, fields) => {
         if (!err) {
