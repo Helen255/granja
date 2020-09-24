@@ -31,7 +31,7 @@ router.post('/consumo', (req, res) => {
     });
 });
 
-//Peticiones de actualización
+//Peticiones put
 router.put('/consumo/:id', (req, res) => {
    const {nombre, fase, precio, cantidad, total} = req.body;
    const { id } = req.params;
@@ -45,7 +45,7 @@ router.put('/consumo/:id', (req, res) => {
    });
 });
 
-//Peticiones de eliminación
+//Peticiones delete
 router.delete('/consumo/:id', (req, res) => {
     const { id } = req.params;
     mysqlConnection.query('DELETE FROM consumo_aves WHERE id = ?', [id], (err, rows, fields) => {

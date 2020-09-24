@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(require('./routes/categoria'));
 app.use(require('./routes/consumo'));
 app.use(require('./routes/compra'));
-app.use(require('./user/compra'));
+app.use(require('./routes/usuarios'));
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {
