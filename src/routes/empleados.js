@@ -33,7 +33,7 @@ router.post('/empleados', (req, res) => {
 
 //Peticiones put
 router.put('/empleados/:id', (req, res) => {
-    const {dpi, nombre, puesto, usuario_id} = req.body;
+    const {dpi, puesto, nombre, usuario_id} = req.body;
     const { id } = req.params;
     const query= 'CALL empleados(?, ?, ?, ?, ?)';
     mysqlConnection.query(query, [id, dpi, puesto, nombre, usuario_id], (err, rows, fields) => {

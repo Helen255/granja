@@ -13,3 +13,23 @@ router.get('/clientes',(req, res) => {
         }
     });
 });
+
+//peticiones post
+router.post('/clientes', (req, res) => {
+    const { id, nombre, empresa } = req.body;
+    const query = ` 
+    CALL consumoAves(?, ?, ?);
+    `;
+    mysqlConnection.query(query, [id, nombre, empresa], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Cliente guardado'});
+        }else {
+            console.log(err);
+        }
+
+
+    });
+});
+
+
+module.exports = router;
