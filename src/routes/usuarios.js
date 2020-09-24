@@ -31,4 +31,18 @@ router.post('/usuarios', (req, res) => {
     });
 });
 
+//Peticiones put
+router.put('/usuarios/:id', (req, res) => {
+    const {usuario, contrasenia} = req.body;
+    const { id } = req.params;
+    const query= 'CALL consumoAves(?, ?, ?)';
+    mysqlConnection.query(query, [id, usuario, contrasenia], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Usuario  actualizado'});
+        }else {
+            console.log(err);
+        }
+    });
+ });
+
 module.exports = router;
