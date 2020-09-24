@@ -18,7 +18,7 @@ router.get('/clientes',(req, res) => {
 router.post('/clientes', (req, res) => {
     const { id, nombre, empresa } = req.body;
     const query = ` 
-    CALL consumoAves(?, ?, ?);
+    CALL clientes(?, ?, ?);
     `;
     mysqlConnection.query(query, [id, nombre, empresa], (err, rows, fields) => {
         if(!err) {
@@ -31,5 +31,19 @@ router.post('/clientes', (req, res) => {
     });
 });
 
+//Peticiones put
+router.put('/clientes/:id', (req, res) => {
+    const {nombre, empresa} = req.body;
+    const { id } = req.params;
+    const query= 'CALL clientes(?, ?, ?)';
+    mysqlConnection.query(query, [id, nombre, empresa], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Cliente  actualizado'});
+        }else {
+            console.log(err);
+        }
+    });
+ });
+ 
 
 module.exports = router;
