@@ -35,7 +35,7 @@ router.post('/ventas', (req, res) => {
 router.put('/ventas/:id', (req, res) => {
     const {total, fecha_venta, usuario_id} = req.body;
     const { id } = req.params;
-    const query= 'CALL ventas(?, ?, ?)';
+    const query= 'CALL ventas(?, ?, ?, ?)';
     mysqlConnection.query(query, [id, total, fecha_venta, usuario_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Venta  actualizada'});
@@ -44,5 +44,17 @@ router.put('/ventas/:id', (req, res) => {
         }
     });
  });
+
+ //Peticiones delete
+router.delete('/ventas/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM venta WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Venta eliminada'});
+        }else {
+            console.log(err);
+        }
+    });
+});
  
 module.exports = router;
