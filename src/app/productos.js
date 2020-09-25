@@ -20,7 +20,7 @@ router.post('/productos', (req, res) => {
     const query = ` 
     CALL productos(?, ?, ?, ?, ?, ?, ?);
     `;
-    mysqlConnection.query(query, [id, codigo, nombre, precio, stock,categoria_id, cliente_id], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, codigo, nombre, precio, stock, categoria_id, cliente_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Venta guardada'});
         }else {
@@ -32,11 +32,11 @@ router.post('/productos', (req, res) => {
 });
 
 //Peticiones put
-router.put('productos/:id', (req, res) => {
+router.put('/productos/:id', (req, res) => {
     const {codigo, nombre, precio, stock, categoria_id, cliente_id} = req.body;
     const { id } = req.params;
     const query= 'CALL productos(?, ?, ?, ?, ?, ?, ?)';
-    mysqlConnection.query(query, [id, codigo, nombre, precio, stock,categoria_id, cliente_id], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, codigo, nombre, precio, stock, categoria_id, cliente_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Producto  actualizado'});
         }else {
@@ -44,4 +44,16 @@ router.put('productos/:id', (req, res) => {
         }
     });
  });
+
+ //Peticiones delete
+router.delete('/productos/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM producto WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Producto eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
 module.exports = router;
