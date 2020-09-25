@@ -35,7 +35,7 @@ router.post('/telefonos', (req, res) => {
 router.put('/telefonos/:id', (req, res) => {
     const {telefono, empleado_id, cliente_id, proveedores_id} = req.body;
     const { id } = req.params;
-    const query= 'CALL telefonos(?, ?, ?, ?. ?)';
+    const query= 'CALL telefonos(?, ?, ?, ?, ?)';
     mysqlConnection.query(query, [id, telefono, empleado_id, cliente_id, proveedores_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Telefono  actualizado'});
@@ -44,4 +44,17 @@ router.put('/telefonos/:id', (req, res) => {
         }
     });
  });
+
+ //Peticiones delete
+router.delete('/telefonos/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM telefonos WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Telefono eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
+
 module.exports = router;
