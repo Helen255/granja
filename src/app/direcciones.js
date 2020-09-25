@@ -14,4 +14,21 @@ router.get('/direcciones',(req, res) => {
     });
 });
 
+//peticiones post
+router.post('/direcciones', (req, res) => {
+    const { id, direccion, cliente_id, empleado_id } = req.body;
+    const query = ` 
+    CALL direcciones(?, ?, ?, ?, ?, ?);
+    `;
+    mysqlConnection.query(query, [id, direccion, cliente_id, empleado_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Dirección guardada'});
+        }else {
+            console.log(err);
+        }
+
+
+    });
+});
+
 module.exports = router;
