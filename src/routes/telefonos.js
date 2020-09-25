@@ -31,4 +31,17 @@ router.post('/telefonos', (req, res) => {
     });
 });
 
+
+router.put('/telefonos/:id', (req, res) => {
+    const {telefono, empleado_id, cliente_id, proveedores_id} = req.body;
+    const { id } = req.params;
+    const query= 'CALL telefonos(?, ?, ?, ?. ?)';
+    mysqlConnection.query(query, [id, telefono, empleado_id, cliente_id, proveedores_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Telefono  actualizado'});
+        }else {
+            console.log(err);
+        }
+    });
+ });
 module.exports = router;
