@@ -20,6 +20,7 @@ app.use(require('./app/telefonos'));
 app.use(require('./app/direcciones'));
 app.use(require('./app/ventas'));
 app.use(require('./app/productos'));
+app.use(require('./app/detalle'));
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {
