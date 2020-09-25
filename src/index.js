@@ -9,14 +9,15 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.json());
 
 //Rutas
-app.use(require('./routes/categoria'));
-app.use(require('./routes/consumo'));
-app.use(require('./routes/compra'));
-app.use(require('./routes/usuarios'));
-app.use(require('./routes/empleados'));
-app.use(require('./routes/clientes'));
-app.use(require('./routes/proveedores'));
-app.use(require('./routes/telefonos'));
+app.use(require('./app/categoria'));
+app.use(require('./app/consumo'));
+app.use(require('./app/compra'));
+app.use(require('./app/usuarios'));
+app.use(require('./app/empleados'));
+app.use(require('./app/clientes'));
+app.use(require('./app/proveedores'));
+app.use(require('./app/telefonos'));
+app.use(require('./app/direcciones'));
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {
