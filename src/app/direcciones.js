@@ -45,4 +45,16 @@ router.put('/direcciones/:id', (req, res) => {
     });
  });
 
+ //Peticiones delete
+router.delete('/direcciones/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM direccion WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Dirección eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
+
 module.exports = router;
