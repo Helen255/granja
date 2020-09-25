@@ -16,6 +16,7 @@ app.use(require('./routes/usuarios'));
 app.use(require('./routes/empleados'));
 app.use(require('./routes/clientes'));
 app.use(require('./routes/proveedores'));
+app.use(require('./routes/telefonos'));
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {
