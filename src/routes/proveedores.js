@@ -45,4 +45,17 @@ router.put('/proveedores/:id', (req, res) => {
     });
  });
 
+ //Peticiones delete
+router.delete('/proveedores/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM proveedores WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Proveedor eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
+
+
 module.exports = router;
