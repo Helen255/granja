@@ -18,7 +18,7 @@ router.get('/productos',(req, res) => {
 router.post('/productos', (req, res) => {
     const { id, codigo, nombre, precio, stock, categoria_id, cliente_id } = req.body;
     const query = ` 
-    CALL direcciones(?, ?, ?, ?, ?, ?, ?);
+    CALL productos(?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(query, [id, codigo, nombre, precio, stock,categoria_id, cliente_id], (err, rows, fields) => {
         if(!err) {
@@ -31,4 +31,17 @@ router.post('/productos', (req, res) => {
     });
 });
 
+//Peticiones put
+router.put('productos/:id', (req, res) => {
+    const {codigo, nombre, precio, stock, categoria_id, cliente_id} = req.body;
+    const { id } = req.params;
+    const query= 'CALL productos(?, ?, ?, ?, ?, ?, ?)';
+    mysqlConnection.query(query, [id, codigo, nombre, precio, stock,categoria_id, cliente_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Producto  actualizado'});
+        }else {
+            console.log(err);
+        }
+    });
+ });
 module.exports = router;
