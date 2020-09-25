@@ -14,4 +14,21 @@ router.get('/ventas',(req, res) => {
     });
 });
 
+//peticiones post
+router.post('/ventas', (req, res) => {
+    const { id, total, fecha_venta, usuario_id} = req.body;
+    const query = ` 
+    CALL ventas(?, ?, ?, ?);
+    `;
+    mysqlConnection.query(query, [id,  total, fecha_venta, usuario_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Venta guardada'});
+        }else {
+            console.log(err);
+        }
+
+
+    });
+});
+
 module.exports = router;
