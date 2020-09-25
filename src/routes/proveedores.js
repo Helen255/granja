@@ -31,4 +31,18 @@ router.post('/proveedores', (req, res) => {
     });
 });
 
+//Peticiones put
+router.put('/proveedores/:id', (req, res) => {
+    const {nombre, empresa, compra_aves_id, consumo_aves_id} = req.body;
+    const { id } = req.params;
+    const query= 'CALL proveedores(?, ?, ?, ?, ?)';
+    mysqlConnection.query(query, [id, nombre, empresa, compra_aves_id, consumo_aves_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Proveedor  actualizado'});
+        }else {
+            console.log(err);
+        }
+    });
+ });
+
 module.exports = router;
