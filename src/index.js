@@ -18,6 +18,7 @@ app.use(require('./app/clientes'));
 app.use(require('./app/proveedores'));
 app.use(require('./app/telefonos'));
 app.use(require('./app/direcciones'));
+app.use(require('./app/ventas'));
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {
