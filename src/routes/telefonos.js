@@ -14,4 +14,21 @@ router.get('/telefonos',(req, res) => {
     });
 });
 
+//peticiones post
+router.post('/telefonos', (req, res) => {
+    const { id, telefono, empleado_id, cliente_id, proveedores_id} = req.body;
+    const query = ` 
+    CALL telefonos(?, ?, ?, ?, ?);
+    `;
+    mysqlConnection.query(query, [id, telefono, empleado_id, cliente_id, proveedores_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Telefono guardado'});
+        }else {
+            console.log(err);
+        }
+
+
+    });
+});
+
 module.exports = router;
