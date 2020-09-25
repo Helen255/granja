@@ -18,7 +18,7 @@ router.get('/direcciones',(req, res) => {
 router.post('/direcciones', (req, res) => {
     const { id, direccion, cliente_id, empleado_id } = req.body;
     const query = ` 
-    CALL direcciones(?, ?, ?, ?, ?, ?);
+    CALL direcciones(?, ?, ?, ?);
     `;
     mysqlConnection.query(query, [id, direccion, cliente_id, empleado_id], (err, rows, fields) => {
         if(!err) {
@@ -30,5 +30,19 @@ router.post('/direcciones', (req, res) => {
 
     });
 });
+
+//Peticiones put
+router.put('/direcciones/:id', (req, res) => {
+    const {direccion, cliente_id, empleado_id} = req.body;
+    const { id } = req.params;
+    const query= 'CALL direcciones(?, ?, ?, ?)';
+    mysqlConnection.query(query, [id,direccion, cliente_id, empleado_id], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Dirección  actualizada'});
+        }else {
+            console.log(err);
+        }
+    });
+ });
 
 module.exports = router;
