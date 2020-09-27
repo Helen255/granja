@@ -36,7 +36,7 @@ router.put('/direcciones/:id', (req, res) => {
     const {direccion, cliente_id, empleado_id} = req.body;
     const { id } = req.params;
     const query= 'CALL direcciones(?, ?, ?, ?)';
-    mysqlConnection.query(query, [id,direccion, cliente_id, empleado_id], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, direccion, cliente_id, empleado_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Dirección  actualizada'});
         }else {

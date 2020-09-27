@@ -33,7 +33,7 @@ router.post('/fase', (req, res) => {
 
 //Peticiones put
 router.put('/fase/:id', (req, res) => {
-    const {id, numero_fase } = req.body;
+    const {numero_fase } = req.body;
     const { id } = req.params;
     const query= 'CALL fases(?, ?)';
     mysqlConnection.query(query, [id, numero_fase ], (err, rows, fields) => {
@@ -43,7 +43,7 @@ router.put('/fase/:id', (req, res) => {
             console.log(err);
         }
     });
- });
+});
 
 //Peticiones delete
 router.delete('/fase/:id', (req, res) => {
