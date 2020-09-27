@@ -14,4 +14,20 @@ router.get('/fase',(req, res) => {
     });
 });
 
+//peticiones post
+router.post('/fase', (req, res) => {
+    const { id, numero_fase } = req.body;
+    const query = ` 
+    CALL fases(?, ?);
+    `;
+    mysqlConnection.query(query, [id, numero_fase], (err, rows, fields) => {
+        if(!err) {
+            res.json({Status: 'Fase guardada'});
+        }else {
+            console.log(err);
+        }
+
+
+    });
+});
 module.exports = router;
