@@ -18,9 +18,9 @@ router.get('/gastos',(req, res) => {
 router.post('/gastos', (req, res) => {
     const { id, total, fecha, codigo, proveedores_id, fases_id } = req.body;
     const query = ` 
-    CALL consumoAves(?, ?, ?, ?, ?, ?);
+    CALL gastos(?, ?, ?, ?, ?, ?);
     `;
-    mysqlConnection.query(query, [id,  total, fecha, codigo, proveedores_id, fases_id], (err, rows, fields) => {
+    mysqlConnection.query(query, [id,  total, fecha, codigo, proveedores_id, fases_id ], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Gasto guardado'});
         }else {
@@ -33,10 +33,10 @@ router.post('/gastos', (req, res) => {
 
 //Peticiones put
 router.put('/gastos/:id', (req, res) => {
-   const { total, fecha, codigo, proveedores_id, fases_id} = req.body;
+   const { total, fecha, codigo, proveedores_id, fases_id } = req.body;
    const { id } = req.params;
    const query= 'CALL gastos(?, ?, ?, ?, ?, ?)';
-   mysqlConnection.query(query, [id,  total, fecha, codigo, proveedores_id, fases_id], (err, rows, fields) => {
+   mysqlConnection.query(query, [id,  total, fecha, codigo, proveedores_id, fases_id ], (err, rows, fields) => {
        if(!err) {
            res.json({Status: 'Gasto  actualizado'});
        }else {
