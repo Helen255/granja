@@ -30,4 +30,16 @@ router.post('/fase', (req, res) => {
 
     });
 });
+
+//Peticiones delete
+router.delete('/fase/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM fases WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Fase eliminada'});
+        }else {
+            console.log(err);
+        }
+    });
+});
 module.exports = router;
