@@ -16,11 +16,11 @@ router.get('/productos',(req, res) => {
 
 //peticiones post
 router.post('/productos', (req, res) => {
-    const { id, codigo, nombre, precio, stock, categoria_id, cliente_id } = req.body;
+    const { id, codigo, precio, stock, activo, categoria_id } = req.body;
     const query = ` 
-    CALL productos(?, ?, ?, ?, ?, ?, ?);
+    CALL productos(?, ?, ?, ?, ?, ?);
     `;
-    mysqlConnection.query(query, [id, codigo, nombre, precio, stock, categoria_id, cliente_id], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, codigo, precio, stock, activo, categoria_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Venta guardada'});
         }else {
@@ -35,8 +35,8 @@ router.post('/productos', (req, res) => {
 router.put('/productos/:id', (req, res) => {
     const {codigo, nombre, precio, stock, categoria_id, cliente_id} = req.body;
     const { id } = req.params;
-    const query= 'CALL productos(?, ?, ?, ?, ?, ?, ?)';
-    mysqlConnection.query(query, [id, codigo, nombre, precio, stock, categoria_id, cliente_id], (err, rows, fields) => {
+    const query= 'CALL productos(?, ?, ?, ?, ?, ?)';
+    mysqlConnection.query(query, [id, codigo, precio, stock, activo, categoria_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Producto  actualizado'});
         }else {
