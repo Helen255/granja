@@ -22,6 +22,7 @@ app.use(require('./routes/ventas'));
 app.use(require('./routes/productos'));
 app.use(require('./routes/detalle'));
 app.use(require('./routes/compra'));
+app.use(require('./routes/fase'));
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {
