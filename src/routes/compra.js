@@ -18,7 +18,7 @@ router.get('/compra',(req, res) => {
 router.post('/compra', (req, res) => {
     const { id, descripcion, cantidad, precio, fecha_compra, total, producto_id } = req.body;
     const query = ` 
-    CALL comprasAves(?, ?, ?, ?, ?, ?, ?);
+    CALL compras(?, ?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(query, [id, descripcion, cantidad, precio, fecha_compra, total, producto_id], (err, rows, fields) => {
         if(!err) {

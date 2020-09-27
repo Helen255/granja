@@ -16,7 +16,7 @@ router.get('/ventas',(req, res) => {
 
 //peticiones post
 router.post('/ventas', (req, res) => {
-    const { id, total, fecha_venta, usuario_id, cliente_id}, cliente_id = req.body;
+    const { id, total, fecha_venta, usuario_id, cliente_id } = req.body;
     const query = ` 
     CALL ventas(?, ?, ?, ?, ?);
     `;

@@ -33,7 +33,7 @@ router.post('/productos', (req, res) => {
 
 //Peticiones put
 router.put('/productos/:id', (req, res) => {
-    const {codigo, nombre, precio, stock, categoria_id, cliente_id} = req.body;
+    const {codigo, precio, stock, activo, categoria_id} = req.body;
     const { id } = req.params;
     const query= 'CALL productos(?, ?, ?, ?, ?, ?)';
     mysqlConnection.query(query, [id, codigo, precio, stock, activo, categoria_id], (err, rows, fields) => {
