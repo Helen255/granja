@@ -16,11 +16,11 @@ router.get('/proveedores',(req, res) => {
 
 //peticiones post
 router.post('/proveedores', (req, res) => {
-    const { id, nombre, empresa, compra_aves_id, consumo_aves_id } = req.body;
+    const { id, nombre, empresa, compras_id } = req.body;
     const query = ` 
-    CALL proveedores(?, ?, ?, ?, ?);
+    CALL proveedor(?, ?, ?, ?);
     `;
-    mysqlConnection.query(query, [id,nombre, empresa, compra_aves_id, consumo_aves_id], (err, rows, fields) => {
+    mysqlConnection.query(query, [id,nombre, empresa, compras_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Proveedor guardado'});
         }else {
@@ -33,10 +33,10 @@ router.post('/proveedores', (req, res) => {
 
 //Peticiones put
 router.put('/proveedores/:id', (req, res) => {
-    const {nombre, empresa, compra_aves_id, consumo_aves_id} = req.body;
+    const {nombre, empresa, compras_id} = req.body;
     const { id } = req.params;
-    const query= 'CALL proveedores(?, ?, ?, ?, ?)';
-    mysqlConnection.query(query, [id, nombre, empresa, compra_aves_id, consumo_aves_id], (err, rows, fields) => {
+    const query= 'CALL proveedor(?, ?, ?, ?, ?)';
+    mysqlConnection.query(query, [id,nombre, empresa, compras_id], (err, rows, fields) => {
         if(!err) {
             res.json({Status: 'Proveedor  actualizado'});
         }else {
