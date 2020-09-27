@@ -45,4 +45,16 @@ router.put('/motivoGasto/:id', (req, res) => {
     });
  });
 
+ //Peticiones de eliminación
+router.delete('/motivoGasto/:id', (req, res) => {
+    const { id } = req.params;
+    mysqlConnection.query('DELETE FROM motivo_gasto WHERE id = ?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Motivo gasto eliminado'});
+        }else {
+            console.log(err);
+        }
+    });
+});
+
 module.exports = router;
