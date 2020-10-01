@@ -23,6 +23,12 @@ app.use(express.json());
 //app.use(require('../src/routes/categoria'));
 const categoria = require ('../src/routes/categoria_ruta.js');
 app.use('/categoria/', categoria);
+
+const cliente = require ('../src/routes/cliente_ruta.js');
+app.use('/cliente/', cliente);
+
+const compra = require ('../src/routes/compra_ruta.js');
+app.use('/compra/', compra);
 /*app.use(require('../src/routes/clientes'));
 app.use(require('../src/routes/gastos'));
 app.use(require('../src/routes/usuarios'));
