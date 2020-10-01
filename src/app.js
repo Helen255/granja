@@ -41,6 +41,12 @@ app.use('/fase/', fase);
 
 const motivoGasto = require ('../src/routes/motivoGasto_ruta.js');
 app.use('/motivoGasto/', motivoGasto);
+
+const producto = require ('../src/routes/producto_ruta.js');
+app.use('/producto/', producto);
+
+const proveedor = require ('../src/routes/proveedor_ruta.js');
+app.use('/proveedor/', proveedor);
 /*app.use(require('../src/routes/clientes'));
 app.use(require('../src/routes/gastos'));
 app.use(require('../src/routes/usuarios'));
