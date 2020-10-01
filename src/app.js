@@ -29,6 +29,18 @@ app.use('/cliente/', cliente);
 
 const compra = require ('../src/routes/compra_ruta.js');
 app.use('/compra/', compra);
+
+const direccion = require ('../src/routes/direccion_ruta.js');
+app.use('/direccion/', direccion);
+
+const empleado = require ('../src/routes/empleado_ruta.js');
+app.use('/empleado/', empleado);
+
+const fase = require ('../src/routes/fase_ruta.js');
+app.use('/fase/', fase);
+
+const motivoGasto = require ('../src/routes/motivoGasto_ruta.js');
+app.use('/motivoGasto/', motivoGasto);
 /*app.use(require('../src/routes/clientes'));
 app.use(require('../src/routes/gastos'));
 app.use(require('../src/routes/usuarios'));
