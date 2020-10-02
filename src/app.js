@@ -47,6 +47,9 @@ app.use('/producto/', producto);
 
 const proveedor = require ('../src/routes/proveedor_ruta.js');
 app.use('/proveedor/', proveedor);
+
+const telefono = require ('../src/routes/telefono_ruta.js');
+app.use('/telefono/', telefono);
 /*app.use(require('../src/routes/clientes'));
 app.use(require('../src/routes/gastos'));
 app.use(require('../src/routes/usuarios'));
