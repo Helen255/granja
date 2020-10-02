@@ -50,6 +50,9 @@ app.use('/proveedor/', proveedor);
 
 const telefono = require ('../src/routes/telefono_ruta.js');
 app.use('/telefono/', telefono);
+
+const usuario = require ('../src/routes/usuario_ruta.js');
+app.use('/usuario/', usuario);
 /*app.use(require('../src/routes/clientes'));
 app.use(require('../src/routes/gastos'));
 app.use(require('../src/routes/usuarios'));
