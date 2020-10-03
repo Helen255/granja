@@ -11,80 +11,37 @@ exports.create = (req, res) => {
     Categoria.crear(categoria, (err, data) => {
         if (err)
             console.log(err);
-       /* res.status(500).send({
-            message: err.message || 'Error al crear categoria'
-        });*/
         else res.send(data);
     });
 }
-
-
-
-
-
-/*
-//Peticioens get
-exports.lista = (req, res) => {
-    mysqlConnection.query('SELECT * FROM categoria', (err, rows, fields ) => {
-        if(!err) {
-            res.json(rows);
-        }else {
+//Petición Get
+exports.list = (req, res) => {
+    Categoria.getList((err, data) => {
+        if (err)
             console.log(err);
-        }
+        else res.send(data);
     });
 };
 
-const express = require('express');
-const mysqlConnection = require('../db');
-const router = express.Router();
 
+exports.update = (req, res) => {
+    Categoria.updateId(
+        req.params.categoriaId,
+        new Categoria(req.body),
+        (err, data) => {
+            if (err)
+                console.log(err);
+            else res.send(data);
 
-//peticiones post
-exports.crear = (req, res) => {
-    const { id, nombre, descripcion } = req.body;
-    const query = ` 
-    CALL categorias(?, ?, ?);
-    `;
-    mysqlConnection.query(query, [id, nombre, descripcion], (err, rows, fields) => {
-        if(!err) {
-            res.json({Status: 'Categoria guardada'});
-        }else {
-            console.log(err);
         }
+    );
 
+};
 
+exports.delete = (req, res) => {
+    Categoria.removeId(req.params.categoriaId, (err, data) => {
+        if (err) {
+            console.log(err);
+        }else res.send({ message: `Categoria eliminada!`});
     });
 };
-/*
-//Peticiones de actualización
-router.put('/categoria/:id', (req, res) => {
-   const {nombre, descripcion} = req.body;
-   const { id } = req.params;
-   const query= 'CALL categorias(?, ?, ?)';
-   mysqlConnection.query(query, [id, nombre, descripcion], (err, rows, fields) => {
-       if(!err) {
-           res.json({Status: 'Categoria actualizada'});
-       }else {
-           console.log(err);
-       }
-   });
-});
-
-//Peticiones de eliminación
-router.delete('/categoria/:id', (req, res) => {
-    const { id } = req.params;
-    mysqlConnection.query('DELETE FROM categoria WHERE id = ?', [id], (err, rows, fields) => {
-        if (!err) {
-            res.json({Status: 'Categoria eliminada'});
-        }else {
-            console.log(err);
-        }
-    });
-});*/
-//module.exports = router; 
-
-
-
-
-
-
