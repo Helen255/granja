@@ -1,16 +1,17 @@
 const express = require('express');
 var router = express.Router();
-const categoriaControlador=require('../controllers/categoria_controlador');
+const categoriaControlador = require('../controllers/categoria_controlador');
 
-router
-.route('/')
-//.get(categoriaControlador.lista)
-.post(categoriaControlador.create);
+router.route('/')
+.get(categoriaControlador.list)
+.post(categoriaControlador.create)
 
- /*router.route('/:songId')
-    .get(songController.show)
-    .patch(songController.update)
-    .delete(songController.destroy);*/
+router.route('/:categoriaId')
+.put(categoriaControlador.update)
+
+router.route('/:categoriaId')
+.delete(categoriaControlador.delete)
+
 
 
 module.exports = router;
