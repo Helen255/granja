@@ -1,16 +1,17 @@
 const express = require('express');
 var router = express.Router();
-const empleadoControlador=require('../controllers/empleado_controlador');
+const empleadoControlador = require('../controllers/empleado_controlador');
 
-router
-.route('/')
-//.get(categoriaControlador.lista)
-.post(empleadoControlador.create);
+router.route('/')
+    .get(empleadoControlador.list)
+    .post(empleadoControlador.create)
 
- /*router.route('/:songId')
-    .get(songController.show)
-    .patch(songController.update)
-    .delete(songController.destroy);*/
+router.route('/:empleadoId')
+    .put(empleadoControlador.update)
+
+router.route('/:empleadoId')
+    .delete(empleadoControlador.delete)
+
 
 
 module.exports = router;
