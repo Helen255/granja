@@ -24,4 +24,48 @@ Cliente.crear = (nuevoCliente, result) => {
     });
 }
 
+//Petición Get
+Cliente.getList = result => {
+    conexion.query("SELECT * FROM cliente", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("cliente:", res);
+        result(null, res);
+    });
+};
+
+//Petición Put
+Cliente.updateId = (id, clienteActu, result) => {
+    const query = ` 
+    CALL clientes(?, ?, ?);
+    `;
+    conexion.query(query, [clienteActu.nombre, clienteActu.empresa, id], (err, rows, fields) => {
+        if (!err) {
+            result(null, { id: result.updateId, ...clienteActu })
+            return;
+        } else {
+            console.log(err);
+            result(err, null)
+            return;
+        }
+
+    });
+}
+
+//Petición Delete
+Cliente.removeId = (id, result) => {
+    conexion.query("DELETE FROM cliente WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("Cliente id eliminado: ", id);
+        result(null, res);
+    });
+};
+
 module.exports = Cliente;
