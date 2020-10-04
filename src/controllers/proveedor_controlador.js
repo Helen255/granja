@@ -17,6 +17,38 @@ exports.create = (req, res) => {
 }
 
 
+//Petición Get
+exports.list = (req, res) => {
+    Proveedor.getList((err, data) => {
+        if (err)
+            console.log(err);
+        else res.send(data);
+    });
+};
+
+
+exports.update = (req, res) => {
+    Proveedor.updateById(
+        req.params.proveedorId,
+        new Proveedor(req.body),
+        (err, data) => {
+            if (err)
+                console.log(err);
+            else res.send(data);
+
+        }
+    );
+
+};
+
+exports.delete = (req, res) => {
+    Proveedor.removeId(req.params.proveedorId, (err, data) => {
+        if (err) {
+            console.log(err);
+        }else res.send({ message: `Proveeedor eliminado!`});
+    });
+};
+
 
 
 
