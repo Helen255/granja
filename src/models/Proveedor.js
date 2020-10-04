@@ -25,4 +25,47 @@ Proveedor.crear = (nuevoProveedor, result) => {
     });
 }
 
+
+//Petición Get
+Proveedor.getList = result => {
+    conexion.query("SELECT * FROM proveedores", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("proveedor:", res);
+        result(null, res);
+    });
+};
+
+//Petición Put
+Proveedor.updateById = (id, proveedorActu, result) => {
+    const query = "UPDATE proveedores SET nombre = ?, empresa = ?, compras_id = ? WHERE id = ?";
+    conexion.query(query, [proveedorActu.nombre, proveedorActu.empresa, proveedorActu.compras_id, id], (err, rows, fields) => {
+        if (!err) {
+            result(null, { id: result.updateId, ...proveedorActu })
+            return;
+        } else {
+            console.log(err);
+            result(err, null)
+            return;
+        }
+
+    });
+}
+
+//Petición Delete
+Proveedor.removeId = (id, result) => {
+    conexion.query("DELETE FROM proveedores WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("Proveedor id eliminado: ", id);
+        result(null, res);
+    });
+};
+
 module.exports = Proveedor;
