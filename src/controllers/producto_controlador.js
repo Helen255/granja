@@ -17,6 +17,37 @@ exports.create = (req, res) => {
     });
 }
 
+//Petición Get
+exports.list = (req, res) => {
+    Producto.getList((err, data) => {
+        if (err)
+            console.log(err);
+        else res.send(data);
+    });
+};
+
+
+exports.update = (req, res) => {
+    Producto.updateById(
+        req.params.productoId,
+        new Producto(req.body),
+        (err, data) => {
+            if (err)
+                console.log(err);
+            else res.send(data);
+
+        }
+    );
+
+};
+
+exports.delete = (req, res) => {
+    Producto.removeId(req.params.productoId, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else res.send({ message: `Producto eliminado!` });
+    });
+};
 
 
 
