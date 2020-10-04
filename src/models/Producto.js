@@ -27,4 +27,47 @@ Producto.crear = (nuevoProducto, result) => {
     });
 }
 
+//Petición Get
+Producto.getList = result => {
+    conexion.query("SELECT * FROM producto", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("producto:", res);
+        result(null, res);
+    });
+};
+
+//Petición Put
+Producto.updateById = (id, productoActu, result) => {
+    const query = "UPDATE producto SET codigo = ?, precio = ?, stock = ?, activo = ?, categoria_id = ? WHERE id = ?";
+    conexion.query(query, [productoActu.codigo, productoActu.precio, productoActu.stock, productoActu.activo, productoActu.categoria_id, id], (err, rows, fields) => {
+        if (!err) {
+            result(null, { id: result.updateById, ...productoActu })
+            return;
+        } else {
+            console.log(err);
+            result(err, null)
+            return;
+        }
+
+    });
+}
+
+
+//Petición Delete
+Producto.removeId = (id, result) => {
+    conexion.query("DELETE FROM producto WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("Producto id eliminada: ", id);
+        result(null, res);
+    });
+};
+
 module.exports = Producto;
