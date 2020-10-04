@@ -38,13 +38,11 @@ Categoria.getList = result => {
 };
 
 //Petición Put
-Categoria.updateId = (id, categoriaActu, result) => {
-    const query = ` 
-    CALL categorias(?, ?, ?);
-    `;
+Categoria.updateById = (id, categoriaActu, result) => {
+    const query = "UPDATE categoria SET nombre = ?, descripcion = ? WHERE id = ?";
     conexion.query(query, [categoriaActu.nombre, categoriaActu.descripcion, id], (err, rows, fields) => {
         if (!err) {
-            result(null, { id: result.updateId, ...categoriaActu })
+            result(null, { id: result.updateById, ...categoriaActu })
             return;
         } else {
             console.log(err);

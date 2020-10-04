@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const mysqlConnection = require('../db');
 const router = express.Router();
 
@@ -57,4 +57,4 @@ router.delete('/motivoGasto/:id', (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = router;*/

@@ -40,9 +40,7 @@ Direccion.getList = result => {
 
 //Petición Put
 Direccion.updateId = (id, direccionActu, result) => {
-    const query = ` 
-    CALL direcciones(?, ?, ?, ?);
-    `;
+    const query = "UPDATE direccion SET direccion = ?, cliente_id = ?, empleado_id = ? WHERE id = ?"
     conexion.query(query, [direccionActu.direccion, direccionActu.cliente_id, direccionActu.empleado_id, id], (err, rows, fields) => {
         if (!err) {
             result(null, { id: result.updateId, ...direccionActu })

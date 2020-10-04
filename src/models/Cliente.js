@@ -39,9 +39,7 @@ Cliente.getList = result => {
 
 //Petición Put
 Cliente.updateId = (id, clienteActu, result) => {
-    const query = ` 
-    CALL clientes(?, ?, ?);
-    `;
+    const query ="UPDATE cliente SET nombre = ?, empresa = ? WHERE id = ?";
     conexion.query(query, [clienteActu.nombre, clienteActu.empresa, id], (err, rows, fields) => {
         if (!err) {
             result(null, { id: result.updateId, ...clienteActu })

@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 //Peticioens get
-router.get('/direcciones',(req, res) => {
+/*router.get('/direcciones',(req, res) => {
     mysqlConnection.query('SELECT * FROM direccion', (err, rows, fields ) => {
         if(!err) {
             res.json(rows);
@@ -57,4 +57,4 @@ router.delete('/direcciones/:id', (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = router;*/

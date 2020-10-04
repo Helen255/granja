@@ -41,9 +41,7 @@ Empleado.getList = result => {
 
 //Petición Put
 Empleado.updateId = (id, empleadoActu, result) => {
-    const query = ` 
-    CALL empleados(?, ?, ?, ?, ?);
-    `;
+    const query = "UPDATE empleado SET nombre = ?, dpi = ?, puesto = ?, usuario_id = ? WHERE id = ?"
     conexion.query(query, [empleadoActu.nombre, empleadoActu.dpi, empleadoActu.puesto, empleadoActu.usuario_id, id], (err, rows, fields) => {
         if (!err) {
             result(null, { id: result.updateId, ...empleadoActu })

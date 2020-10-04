@@ -25,7 +25,7 @@ exports.list = (req, res) => {
 
 
 exports.update = (req, res) => {
-    Categoria.updateId(
+    Categoria.updateById(
         req.params.categoriaId,
         new Categoria(req.body),
         (err, data) => {

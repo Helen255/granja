@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 //Peticioens get
-router.get('/categoria',(req, res) => {
+/*router.get('/categoria',(req, res) => {
     mysqlConnection.query('SELECT * FROM categoria', (err, rows, fields ) => {
         if(!err) {
             res.json(rows);
@@ -56,4 +56,4 @@ router.delete('/categoria/:id', (req, res) => {
         }
     });
 });
-module.exports = router;
+module.exports = router; */

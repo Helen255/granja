@@ -1,6 +1,7 @@
 const { query } = require('express');
 const conexion = require('../db');
 
+//Metodo constructor
 const Fase = function (fase) {
     this.id = fase.id;
     this.numero_fase = fase.numero_fase;
@@ -38,9 +39,7 @@ Fase.getList = result => {
 
 //Petición Put
 Fase.updateId = (id, faseActu, result) => {
-    const query = ` 
-    CALL fases(?, ?);
-    `;
+    const query = "UPDATE fases SET numero_fase = ? WHERE id = ?"
     conexion.query(query, [faseActu.numero_fase, id], (err, rows, fields) => {
         if (!err) {
             result(null, { id: result.updateId, ...faseActu })

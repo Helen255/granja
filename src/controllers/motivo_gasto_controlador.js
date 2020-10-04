@@ -14,6 +14,37 @@ exports.create = (req, res) => {
     });
 }
 
+exports.list = (req, res) => {
+    MotivoGasto.getList((err, data) => {
+        if (err)
+            console.log(err);
+        else res.send(data);
+    });
+};
+
+
+exports.update = (req, res) => {
+    MotivoGasto.updateId(
+        req.params.motivoGastoId,
+        new MotivoGasto(req.body),
+        (err, data) => {
+            if (err)
+                console.log(err);
+            else res.send(data);
+
+        }
+    );
+
+};
+
+exports.delete = (req, res) => {
+    MotivoGasto.removeId(req.params.motivoGastoId, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else res.send({ message: `MotivoGasto eliminado!` });
+    });
+};
+
 
 
 

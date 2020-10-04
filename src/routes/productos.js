@@ -4,11 +4,11 @@ const router = express.Router();
 
 
 //Peticioens get
-router.get('/productos',(req, res) => {
-    mysqlConnection.query('SELECT * FROM producto', (err, rows, fields ) => {
-        if(!err) {
+router.get('/productos', (req, res) => {
+    mysqlConnection.query('SELECT * FROM producto', (err, rows, fields) => {
+        if (!err) {
             res.json(rows);
-        }else {
+        } else {
             console.log(err);
         }
     });
@@ -21,9 +21,9 @@ router.post('/productos', (req, res) => {
     CALL productos(?, ?, ?, ?, ?, ?);
     `;
     mysqlConnection.query(query, [id, codigo, precio, stock, activo, categoria_id], (err, rows, fields) => {
-        if(!err) {
-            res.json({Status: 'Venta guardada'});
-        }else {
+        if (!err) {
+            res.json({ Status: 'Venta guardada' });
+        } else {
             console.log(err);
         }
 
@@ -33,25 +33,25 @@ router.post('/productos', (req, res) => {
 
 //Peticiones put
 router.put('/productos/:id', (req, res) => {
-    const {codigo, precio, stock, activo, categoria_id} = req.body;
+    const { codigo, precio, stock, activo, categoria_id } = req.body;
     const { id } = req.params;
-    const query= 'CALL productos(?, ?, ?, ?, ?, ?)';
+    const query = 'CALL productos(?, ?, ?, ?, ?, ?)';
     mysqlConnection.query(query, [id, codigo, precio, stock, activo, categoria_id], (err, rows, fields) => {
-        if(!err) {
-            res.json({Status: 'Producto  actualizado'});
-        }else {
+        if (!err) {
+            res.json({ Status: 'Producto  actualizado' });
+        } else {
             console.log(err);
         }
     });
- });
+});
 
- //Peticiones delete
+//Peticiones delete
 router.delete('/productos/:id', (req, res) => {
     const { id } = req.params;
     mysqlConnection.query('DELETE FROM producto WHERE id = ?', [id], (err, rows, fields) => {
         if (!err) {
-            res.json({Status: 'Producto eliminado'});
-        }else {
+            res.json({ Status: 'Producto eliminado' });
+        } else {
             console.log(err);
         }
     });
