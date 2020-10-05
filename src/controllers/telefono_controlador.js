@@ -17,6 +17,38 @@ exports.create = (req, res) => {
     });
 }
 
+//Petición Get
+exports.list = (req, res) => {
+    Telefono.getList((err, data) => {
+        if (err)
+            console.log(err);
+        else res.send(data);
+    });
+};
+
+
+exports.update = (req, res) => {
+    Telefono.updateById(
+        req.params.telefonoId,
+        new Telefono(req.body),
+        (err, data) => {
+            if (err)
+                console.log(err);
+            else res.send(data);
+
+        }
+    );
+
+};
+
+exports.delete = (req, res) => {
+    Telefono.removeId(req.params.telefonoId, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else res.send({ message: `Telefono eliminada!` });
+    });
+};
+
 
 
 
