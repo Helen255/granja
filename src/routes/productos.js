@@ -3,7 +3,7 @@ const mysqlConnection = require('../db');
 const router = express.Router();
 
 
-//Peticioens get
+/*//Peticioens get
 router.get('/productos', (req, res) => {
     mysqlConnection.query('SELECT * FROM producto', (err, rows, fields) => {
         if (!err) {
@@ -56,4 +56,4 @@ router.delete('/productos/:id', (req, res) => {
         }
     });
 });
-module.exports = router;
+module.exports = router;*/
