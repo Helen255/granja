@@ -2,15 +2,14 @@ const express = require('express');
 var router = express.Router();
 const telefonoControlador=require('../controllers/telefono_controlador');
 
-router
-.route('/')
-//.get(categoriaControlador.lista)
-.post(telefonoControlador.create);
+router.route('/')
+.get(telefonoControlador.list)
+.post(telefonoControlador.create)
 
- /*router.route('/:songId')
-    .get(songController.show)
-    .patch(songController.update)
-    .delete(songController.destroy);*/
+router.route('/:telefonoId')
+.put(telefonoControlador.update)
 
+router.route('/:telefonoId')
+.delete(telefonoControlador.delete)
 
 module.exports = router;
