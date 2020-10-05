@@ -2,15 +2,16 @@ const express = require('express');
 var router = express.Router();
 const proveedorControlador=require('../controllers/proveedor_controlador');
 
-router
-.route('/')
-//.get(categoriaControlador.lista)
-.post(proveedorControlador.create);
+router.route('/')
+.get(proveedorControlador.list)
+.post(proveedorControlador.create)
 
- /*router.route('/:songId')
-    .get(songController.show)
-    .patch(songController.update)
-    .delete(songController.destroy);*/
+router.route('/:proveedorId')
+.put(proveedorControlador.update)
+
+router.route('/:proveedorId')
+.delete(proveedorControlador.delete)
+
 
 
 module.exports = router;
