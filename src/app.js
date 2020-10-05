@@ -54,6 +54,16 @@ app.use('/telefono/', telefono);
 const usuario = require ('../src/routes/usuario_ruta.js');
 app.use('/usuario/', usuario);
 
+//rutas vistas
+app.get('/',(req, res) => {
+    //res.sendFile(path.resolve(__dirname, '../views/index.html'));
+     res.render('index');  
+});
+
+app.get('/categorias',(req, res) => {
+     res.render('categorias');  
+});
+
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {
