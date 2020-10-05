@@ -6,7 +6,7 @@ router.route('/')
 .get(categoriaControlador.list)
 .post(categoriaControlador.create)
 
-router.route(':/categoriaId')
+router.route('/:categoriaId')
 .put(categoriaControlador.update)
 
 router.route('/:categoriaId')
