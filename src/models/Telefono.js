@@ -26,4 +26,47 @@ Telefono.crear = (nuevoTelefono, result) => {
     });
 }
 
+//Petición Get
+Telefono.getList = result => {
+    conexion.query("SELECT * FROM telefono", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("telefono:", res);
+        result(null, res);
+    });
+};
+
+//Petición Put
+Telefono.updateById = (id, telefonoActu, result) => {
+    const query = "UPDATE telefono SET telefono = ?, empleado_id = ?, cliente_id = ?, proveedores_id = ? WHERE id = ?";
+    conexion.query(query, [telefonoActu.telefono, telefonoActu.empleado_id, telefonoActu.cliente_id, telefonoActu.proveedores_id, id], (err, rows, fields) => {
+        if (!err) {
+            result(null, { id: result.updateById, ...telefonoActu })
+            return;
+        } else {
+            console.log(err);
+            result(err, null)
+            return;
+        }
+
+    });
+}
+
+//Petición Delete
+Telefono.removeId = (id, result) => {
+    conexion.query("DELETE FROM telefono WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("Telefono id eliminado: ", id);
+        result(null, res);
+    });
+};
+
+
 module.exports = Telefono;
