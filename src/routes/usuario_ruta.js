@@ -2,15 +2,15 @@ const express = require('express');
 var router = express.Router();
 const usuarioControlador=require('../controllers/usuario_controlador');
 
-router
-.route('/')
-//.get(categoriaControlador.lista)
-.post(usuarioControlador.create);
+router.route('/')
+.get(usuarioControlador.list)
+.post(usuarioControlador.create)
 
- /*router.route('/:songId')
-    .get(songController.show)
-    .patch(songController.update)
-    .delete(songController.destroy);*/
+router.route('/:usuarioId')
+.put(usuarioControlador.update)
+
+router.route('/:usuarioId')
+.delete(usuarioControlador.delete)
 
 
 module.exports = router;
