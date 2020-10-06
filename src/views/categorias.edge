@@ -1,9 +1,19 @@
 @layout('layouts.app')
 @section('content')
 
- <h1>Categorias</h1>
- <ul id="categoria"></ul>
-  
+    <h1>Categorias</h1>
+    @each(so in data)
+
+        <div>
+          <p>{{ so.id }}</p>
+          <p>{{ so.nombre }}</p>
+          <p>{{ so.descripcion }}</p>   
+        </div>            
+    @endeach
+
+        
+                    
+
 @endsection
     
     
