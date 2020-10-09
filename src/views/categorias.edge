@@ -1,19 +1,46 @@
 @layout('layouts.app')
-@section('content')
+ @section('content')
+  
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-3 offset-9">
+        <a href="/web/recibir" class="btn btn-primary text-right">Ingresar</a>
+      </div>
 
-    <h1>Categorias</h1>
-    @each(so in data)
+    </div>
+    <div class="box">
+     <h1 class="display-4 text-center">Categorias</h1>
 
-        <div>
-          <p>{{ so.id }}</p>
-          <p>{{ so.nombre }}</p>
-          <p>{{ so.descripcion }}</p>   
-        </div>            
-    @endeach
-
-        
-                    
-
+      <table class="table table-sm">
+        <thead class="text-dark border border-info">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Acciones </th>
+          </tr>
+        </thead>
+        <tbody>
+          @each(so in data)
+          <tr>
+            <td>{{so.id}}</td>
+            <td>{{so.nombre}}</td>
+            <td>{{so.descripcion}}</td>
+            <td>
+              <div class="field is-grouped">
+                <div>
+                  <button type="button" class="btn btn-warning">Editar</button>
+                  <button type="button" class="btn btn-danger">Borrar</button>
+                  <button type="button" class="btn btn-success"">Detalle</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          @endeach
+        </tbody>
+      </table>
+    </div>  
+  </div>
 @endsection
     
     
