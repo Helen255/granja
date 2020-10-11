@@ -1,6 +1,6 @@
 const MotivoGasto = require('../models/MotivoGasto');
 
-
+//petición post
 exports.create = (req, res) => {
     const motivoGasto = new MotivoGasto({
         id: 0,
@@ -14,6 +14,7 @@ exports.create = (req, res) => {
     });
 }
 
+//petiición get
 exports.list = (req, res) => {
     MotivoGasto.getList((err, data) => {
         if (err)
@@ -22,7 +23,15 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    MotivoGasto.findById(req.params.motivoGastoId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
+//petición update
 exports.update = (req, res) => {
     MotivoGasto.updateId(
         req.params.motivoGastoId,
@@ -37,6 +46,7 @@ exports.update = (req, res) => {
 
 };
 
+//petición delete
 exports.delete = (req, res) => {
     MotivoGasto.removeId(req.params.motivoGastoId, (err, data) => {
         if (err) {

@@ -12,4 +12,9 @@ router.route('/:telefonoId')
 router.route('/:telefonoId')
 .delete(telefonoControlador.delete)
 
+router.route('/:telefonoId')
+.get(telefonoControlador.findById);
+
+
+
 module.exports = router;

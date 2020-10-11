@@ -1,24 +1,24 @@
 const express = require('express');
 let router = express.Router();
-const datosControlador = require('../controllers/datoCategoria_controlador');
+const datosControlador = require('../controllers/datoCliente_controlador');
    
 router.route('/')
-.get(datosControlador.categorias)
+.get(datosControlador.clientes)
 .post(datosControlador.crear)
-//obtener formulario categoria post
+
 router.route('/recibir')
 .get(datosControlador.obtener)
 
-router.route('/editar/:categoriaId')
+router.route('/editar/:clienteId')
 .get(datosControlador.editar);
 
-router.route('/actualizar/:categoriaId')
+router.route('/actualizar/:clienteId')
 .post(datosControlador.actualizar);
 
-router.route('/elimina/:categoriaId')
+router.route('/elimina/:clienteId')
 .get(datosControlador.elimina);
 
-router.route('/eliminar/:categoriaId')
+router.route('/eliminar/:clienteId')
 .post(datosControlador.eliminar);
 
 

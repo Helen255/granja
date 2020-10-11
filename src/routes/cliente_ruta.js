@@ -12,5 +12,8 @@ router.route('/:clienteId')
 router.route('/:clienteId')
 .delete(clienteControlador.delete)
 
+router.route('/:clienteId')
+.get(clienteControlador.findById);
+
 
 module.exports = router;

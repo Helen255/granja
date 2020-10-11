@@ -1,6 +1,6 @@
 const Empleado = require('../models/Empleado');
 
-
+//petición post
 exports.create = (req, res) => {
     const empleado = new Empleado({
         id: 0,
@@ -29,7 +29,15 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    Empleado.findById(req.params.empleadoId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
+//petición update
 exports.update = (req, res) => {
     Empleado.updateId(
         req.params.empleadoId,
@@ -43,7 +51,7 @@ exports.update = (req, res) => {
     );
 
 };
-
+//petición delete
 exports.delete = (req, res) => {
     Empleado.removeId(req.params.empleadoId, (err, data) => {
         if (err) {

@@ -12,5 +12,8 @@ router.route('/:productoId')
 router.route('/:productoId')
 .delete(productoControlador.delete)
 
+router.route('/:productoId')
+.get(productoControlador.findById);
+
 
 module.exports = router;

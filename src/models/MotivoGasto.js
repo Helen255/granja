@@ -1,11 +1,13 @@
 const { query } = require('express');
 const conexion = require('../db');
 
+//método constructor
 const MotivoGasto = function (motivoGasto) {
     this.id = motivoGasto.id;
     this.tipo_gasto = motivoGasto.tipo_gasto;
 }
 
+//petición post
 MotivoGasto.crear = (nuevoGasto, result) => {
     const query = ` 
     CALL motivoGastos(?, ?);
@@ -33,6 +35,21 @@ MotivoGasto.getList = result => {
         }
         console.log("motivoGasto:", res);
         result(null, res);
+    });
+};
+
+//petición get por id
+MotivoGasto.findById = (motivoGastoId, result) => {
+    conexion.query(`SELECT * FROM motivo_gasto WHERE id = ${motivoGastoId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
     });
 };
 

@@ -7,6 +7,7 @@ const Fase = function (fase) {
     this.numero_fase = fase.numero_fase;
 }
 
+//petición post
 Fase.crear = (nuevaFase, result) => {
     const query = ` 
     CALL fases(?, ?);
@@ -34,6 +35,21 @@ Fase.getList = result => {
         }
         console.log("fase:", res);
         result(null, res);
+    });
+};
+
+//petición get por id
+Fase.findById = (faseId, result) => {
+    conexion.query(`SELECT * FROM fase WHERE id = ${faseId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
     });
 };
 

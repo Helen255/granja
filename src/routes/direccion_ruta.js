@@ -12,6 +12,8 @@ router.route('/:direccionId')
 router.route('/:direccionId')
 .delete(direccionControlador.delete)
 
+router.route('/:direccionId')
+.get(direccionControlador.findById);
 
 
 module.exports = router;

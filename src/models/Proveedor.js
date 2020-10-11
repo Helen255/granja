@@ -1,6 +1,7 @@
 const { query } = require('express');
 const conexion = require('../db');
 
+//metodo constructor
 const Proveedor = function (proveedor) {
     this.id = proveedor.id;
     this.nombre = proveedor.nombre;
@@ -8,6 +9,7 @@ const Proveedor = function (proveedor) {
     this.compras_id = proveedor.compras_id
 }
 
+//petición post
 Proveedor.crear = (nuevoProveedor, result) => {
     const query = ` 
     CALL proveedor(?, ?, ?, ?);
@@ -36,6 +38,22 @@ Proveedor.getList = result => {
         }
         console.log("proveedor:", res);
         result(null, res);
+    });
+};
+
+
+//petición get por id
+Proveedor.findById = (proveedorId, result) => {
+    conexion.query(`SELECT * FROM proveedores WHERE id = ${proveedorId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
     });
 };
 

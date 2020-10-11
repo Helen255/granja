@@ -1,6 +1,7 @@
 const { query } = require('express');
 const conexion = require('../db');
 
+//metodo constructor
 const Direccion = function (direccion) {
     this.id = direccion.id;
     this.direccion = direccion.direccion;
@@ -8,6 +9,7 @@ const Direccion = function (direccion) {
     this.empleado_id = direccion.empleado_id;
 }
 
+//petición post
 Direccion.crear = (nuevaDireccion, result) => {
     const query = ` 
     CALL direcciones(?, ?, ?, ?);
@@ -35,6 +37,21 @@ Direccion.getList = result => {
         }
         console.log("dirección:", res);
         result(null, res);
+    });
+};
+
+//petición get por id
+Direccion.findById = (direccionId, result) => {
+    conexion.query(`SELECT * FROM direccion WHERE id = ${direccionId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
     });
 };
 

@@ -23,6 +23,13 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    Categoria.findById(req.params.categoriaId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
 exports.update = (req, res) => {
     Categoria.updateById(

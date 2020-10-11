@@ -12,4 +12,7 @@ router.route('/:categoriaId')
 router.route('/:categoriaId')
 .delete(categoriaControlador.delete)
 
+router.route('/:categoriaId')
+.get(categoriaControlador.findById);
+
 module.exports = router;

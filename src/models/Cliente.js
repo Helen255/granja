@@ -1,12 +1,14 @@
 const { query } = require('express');
 const conexion = require('../db');
 
+//metodo constructor
 const Cliente = function (cliente) {
     this.id = cliente.id;
     this.nombre = cliente.nombre;
     this.empresa = cliente.empresa;
 }
 
+//petición post
 Cliente.crear = (nuevoCliente, result) => {
     const query = ` 
     CALL clientes(?, ?, ?);
@@ -34,6 +36,21 @@ Cliente.getList = result => {
         }
         console.log("cliente:", res);
         result(null, res);
+    });
+};
+
+//petición get por id
+Cliente.findById = (clienteId, result) => {
+    conexion.query(`SELECT * FROM cliente WHERE id = ${clienteId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
     });
 };
 

@@ -1,5 +1,6 @@
 const Producto = require('../models/Producto');
 
+//petición post
 exports.create = (req, res) => {
     const producto = new Producto({
         id: 0,
@@ -26,7 +27,15 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    Producto.findById(req.params.productoId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
+//petición update
 exports.update = (req, res) => {
     Producto.updateById(
         req.params.productoId,
@@ -41,6 +50,7 @@ exports.update = (req, res) => {
 
 };
 
+//petición delete
 exports.delete = (req, res) => {
     Producto.removeId(req.params.productoId, (err, data) => {
         if (err) {

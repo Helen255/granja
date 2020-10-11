@@ -12,6 +12,9 @@ router.route('/:proveedorId')
 router.route('/:proveedorId')
 .delete(proveedorControlador.delete)
 
+router.route('/:proveedorId')
+.get(proveedorControlador.findById);
+
 
 
 module.exports = router;

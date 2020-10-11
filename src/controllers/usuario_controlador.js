@@ -1,6 +1,6 @@
 const Usuario = require('../models/Usuario');
 
-
+//petición post
 exports.create = (req, res) => {
     const usuario = new Usuario({
         id: 0,
@@ -24,7 +24,15 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    Usuario.findById(req.params.usuarioId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
+//petición update
 exports.update = (req, res) => {
     Usuario.updateId(
         req.params.usuarioId,
@@ -39,6 +47,7 @@ exports.update = (req, res) => {
 
 };
 
+//petición delete
 exports.delete = (req, res) => {
     Usuario.removeId(req.params.usuarioId, (err, data) => {
         if (err) {

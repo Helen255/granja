@@ -37,6 +37,21 @@ Categoria.getList = result => {
     });
 };
 
+//petición get por id
+Categoria.findById = (categoriaId, result) => {
+    conexion.query(`SELECT * FROM categoria WHERE id = ${categoriaId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
+    });
+};
+
 //Petición Put
 Categoria.updateById = (id, categoriaActu, result) => {
     const query = "UPDATE categoria SET nombre = ?, descripcion = ? WHERE id = ?";

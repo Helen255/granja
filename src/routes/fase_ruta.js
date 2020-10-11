@@ -11,4 +11,8 @@ router.route('/:faseId')
 
 router.route('/:faseId')
 .delete(faseControlador.delete)
+
+router.route('/:faseId')
+.get(faseControlador.findById);
+
 module.exports = router;

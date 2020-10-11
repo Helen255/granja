@@ -1,0 +1,23 @@
+@layout('layouts.app')
+ @section('content')
+ <h1 class="display-4 text-center">Eliminar Datos Categoria</h1>
+    <div class="container">
+        <div class="box">
+            <form action="/web/eliminar/ {{ data.id }}" method="POST" >
+             <div class="form-group">
+               <label>Nombre</label>
+             <input class= " rounded-pill form-control" value="{{data.nombre}}" name="nombre" >
+             </div>
+             <div class="form-group">
+               <label>Descripción</label>
+             <input class="rounded-pill form-control"  value="{{data.descripcion}}" name="descripcion">
+             </div>
+             <button class="btn btn-primary" value="enviar">Eliminar</button>
+            </form>
+        </div> 
+    </div>
+@endsection
+    
+
+
+

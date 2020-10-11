@@ -1,6 +1,7 @@
 const { query } = require('express');
 const conexion = require('../db');
 
+//metodo constructor
 const Producto = function (producto) {
     this.id = producto.id;
     this.codigo = producto.codigo;
@@ -10,6 +11,7 @@ const Producto = function (producto) {
     this.categoria_id = producto.categoria_id;
 }
 
+//petición post
 Producto.crear = (nuevoProducto, result) => {
     const query = ` 
     CALL productos(?, ?, ?, ?, ?, ?);
@@ -37,6 +39,21 @@ Producto.getList = result => {
         }
         console.log("producto:", res);
         result(null, res);
+    });
+};
+
+//petición get por id
+Producto.findById = (productoId, result) => {
+    conexion.query(`SELECT * FROM producto WHERE id = ${productoId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
     });
 };
 

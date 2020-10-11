@@ -1,6 +1,8 @@
 const { query } = require('express');
 const conexion = require('../db');
+const Direccion = require('./Direccion');
 
+//metodo constructor
 const Empleado = function (empleado) {
     this.id = empleado.id;
     this.dpi = empleado.dpi;
@@ -9,6 +11,7 @@ const Empleado = function (empleado) {
     this.usuario_id = empleado.usuario_id
 }
 
+//petición post
 Empleado.crear = (nuevoEmpleado, result) => {
     const query = ` 
     CALL empleados(?, ?, ?, ?, ?);
@@ -36,6 +39,21 @@ Empleado.getList = result => {
         }
         console.log("empleado:", res);
         result(null, res);
+    });
+};
+
+//petición get por id
+Empleado.findById = (empleadoId, result) => {
+    conexion.query(`SELECT * FROM empleado WHERE id = ${empleadoId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
     });
 };
 

@@ -1,6 +1,6 @@
 const Telefono = require('../models/Telefono');
 
-
+//petición post
 exports.create = (req, res) => {
     const telefono = new Telefono({
         id: 0,
@@ -26,7 +26,15 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    Telefono.findById(req.params.telefonoId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
+//petición update
 exports.update = (req, res) => {
     Telefono.updateById(
         req.params.telefonoId,
@@ -41,6 +49,7 @@ exports.update = (req, res) => {
 
 };
 
+//petición delete
 exports.delete = (req, res) => {
     Telefono.removeId(req.params.telefonoId, (err, data) => {
         if (err) {

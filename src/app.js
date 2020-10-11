@@ -65,10 +65,13 @@ app.get('/',(req, res) => {
     res.render('index');  
 });
 
+//vista categoria
 const vistaCategoria = require('./routes/web')
 app.use('/web/', vistaCategoria)
 
-
+//vista cliente
+const vistaCliente = require('./routes/webCliente')
+app.use('/webCliente/', vistaCliente)
 
 
 //archivos estaticos

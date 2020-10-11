@@ -24,6 +24,13 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    Cliente.findById(req.params.clienteId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
 exports.update = (req, res) => {
     Cliente.updateId(

@@ -12,5 +12,8 @@ router.route('/:usuarioId')
 router.route('/:usuarioId')
 .delete(usuarioControlador.delete)
 
+router.route('/:usuarioId')
+.get(usuarioControlador.findById);
+
 
 module.exports = router;

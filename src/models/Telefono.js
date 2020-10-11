@@ -1,6 +1,7 @@
 const { query } = require('express');
 const conexion = require('../db');
 
+//metodo constructor
 const Telefono = function (telefono) {
     this.id = telefono.id;
     this.telefono = telefono.telefono;
@@ -9,6 +10,7 @@ const Telefono = function (telefono) {
     this.proveedores_id = telefono.proveedores_id
 }
 
+//petición post
 Telefono.crear = (nuevoTelefono, result) => {
     const query = ` 
     CALL telefonos(?, ?, ?, ?, ?);
@@ -36,6 +38,21 @@ Telefono.getList = result => {
         }
         console.log("telefono:", res);
         result(null, res);
+    });
+};
+
+//petición get por id
+Telefono.findById = (telefonoId, result) => {
+    conexion.query(`SELECT * FROM telefono WHERE id = ${telefonoId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        result(null, res[0]);
+        return;
+      }
     });
 };
 

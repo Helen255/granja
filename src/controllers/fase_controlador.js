@@ -23,7 +23,15 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    Fase.findById(req.params.faseId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
+//petición update
 exports.update = (req, res) => {
     Fase.updateId(
         req.params.faseId,
@@ -38,6 +46,7 @@ exports.update = (req, res) => {
 
 };
 
+//petición delete
 exports.delete = (req, res) => {
     Fase.removeId(req.params.faseId, (err, data) => {
         if (err) {

@@ -12,4 +12,8 @@ router.route('/:motivoGastoId')
 router.route('/:motivoGastoId')
 .delete(motivoGastoControlador.delete)
 
+router.route('/:motivoGastoId')
+.get(motivoGastoControlador.findById);
+
+
 module.exports = router;

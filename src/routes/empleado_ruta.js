@@ -12,6 +12,8 @@ router.route('/:empleadoId')
 router.route('/:empleadoId')
     .delete(empleadoControlador.delete)
 
-
+router.route('/:empleadoId')
+.get(empleadoControlador.findById);
+    
 
 module.exports = router;

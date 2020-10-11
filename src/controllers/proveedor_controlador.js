@@ -1,6 +1,7 @@
+const Producto = require('../models/Producto');
 const Proveedor = require('../models/Proveedor');
 
-
+//petición post
 exports.create = (req, res) => {
     const proveedor = new Proveedor({
         id: 0,
@@ -26,7 +27,15 @@ exports.list = (req, res) => {
     });
 };
 
+//petición get por id
+exports.findById = (req, res) => {
+    Proveedor.findById(req.params.proveedorId, (err, data) => {
+      if (err) {
+      } else res.send(data);
+    });
+};
 
+//petición update
 exports.update = (req, res) => {
     Proveedor.updateById(
         req.params.proveedorId,
@@ -41,6 +50,7 @@ exports.update = (req, res) => {
 
 };
 
+//petición delete
 exports.delete = (req, res) => {
     Proveedor.removeId(req.params.proveedorId, (err, data) => {
         if (err) {
