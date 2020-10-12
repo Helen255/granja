@@ -1,0 +1,49 @@
+@layout('layouts.app')
+ @section('content')
+  
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-3 offset-9">
+        <a href="/webUsuario/recibir" class="btn btn-primary text-right">Ingresar</a>
+      </div>
+
+    </div>
+    <div class="box">
+     <h1 class="display-4 text-center">Usuarios</h1>
+
+      <table class="table table-sm">
+        <thead class="text-dark border border-info">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">contrasenia</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          @each(so in data)
+          <tr>
+            <td>{{so.id}}</td>
+            <td>{{so.usuario}}</td>
+            <td>{{so.contrasenia}}</td>
+            
+            
+            <td>
+              <div class="field is-grouped">
+                <div> 
+                  <a href="/webUsuario/editar/{{so.id}}"  class="btn btn-warning text-right">Editar</a>
+                  <a href="/webUsuario/elimina/{{so.id}}"  class="btn btn-danger text-right">Eliminar</a>
+                  <a href="/web/detalle/{{so.id}}"  class="btn btn-success text-right">Detalle</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          @endeach
+        </tbody>
+      </table>
+    </div>  
+  </div>
+@endsection
+    
+    
+

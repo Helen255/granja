@@ -1,15 +1,15 @@
 const { json } = require('express');
 const fetch = require('node-fetch');
-const Categorias = require('../models/Categoria');
+const Fases = require('../models/Fase');
 
 
-async function categorias(req, res) {
-  let url = 'http://localhost:3000/categoria';
+async function fases(req, res) {
+  let url = 'http://localhost:3000/fase';
 
   await fetch(url)
     .then(res => res.json())
     .then(data => {
-      res.render('categorias', { data });
+      res.render('fases', { data });
     }).catch(err => {
       console.log(error);
 
@@ -17,17 +17,16 @@ async function categorias(req, res) {
 }
 
 function obtener(req, res) {
-  res.render('crear');
+  res.render('crearFases');
 }
 async function crear(req, res) {
   let data = await req.body;
   const body = {
     'id': data.id,
-    'nombre': data.nombre,
-    'descripcion': data.descripcion
+    'numero_fase': data.numero_fase
   };
   console.log(body);
-  await fetch('http://localhost:3000/categoria', {
+  await fetch('http://localhost:3000/fase', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -36,7 +35,7 @@ async function crear(req, res) {
   })
     .then(res => res.json())
     .then(json => {
-      res.redirect('/web/');
+      res.redirect('/webFase/');
     })
     .catch(error => {
       res.render('index', { respon: 'dato incorrecto' });
@@ -45,12 +44,13 @@ async function crear(req, res) {
 }
 
 async function editar(req, res) {
-  let idcategoria = req.params.categoriaId;
+  let idfase = req.params.faseId;
 
- await fetch('http://localhost:3000/categoria/' + idcategoria)
+ await fetch('http://localhost:3000/fase/' + idfase)
     .then(res => res.json())
     .then(data => {
-      res.render('actualizar', { data })
+      //ruta vista
+      res.render('actualizarFases', { data })
       console.log(data)
     }).catch(err => {
       console.log(err);
@@ -58,22 +58,21 @@ async function editar(req, res) {
 }
 
 async function actualizar(req, res) {
-  let categoria = req.body;
-  let idcategoria = req.params.categoriaId;
+  let fase = req.body;
+  let idfase = req.params.faseId;
   const body = {
-    'id': categoria.id,
-    'nombre': categoria.nombre,
-    'descripcion': categoria.descripcion
+    'id': fase.id,
+    'numero_fase': fase.numero_fase
   };
 
-  await fetch('http://localhost:3000/categoria/' + idcategoria, {
+  await fetch('http://localhost:3000/fase/' + idfase, {
     method: 'put',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body)
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web');
+    res.redirect('/webFase');
   })
   .catch(error => {
     res.render('index', { respon: 'dato incorrecto' });
@@ -83,26 +82,26 @@ async function actualizar(req, res) {
 
 
 function elimina(req, res){
-  let idcategoria = req.params.categoriaId;
-  let url = "http://localhost:3000/categoria/"+idcategoria ;
+  let idfase = req.params.faseId;
+  let url = "http://localhost:3000/fase/"+idfase ;
 
       fetch(url)
       .then(res => res.json())
       .then(data => {
-             res.render('eliminar',{data})
+             res.render('eliminarFases',{data})
       }).catch(err =>{
       console.log(error);     
   });
 }
 
 async function eliminar(req, res){
-  let categoriaId = req.params.categoriaId;
- await fetch('http://localhost:3000/categoria/'+categoriaId, {
+  let faseId = req.params.faseId;
+ await fetch('http://localhost:3000/fase/'+faseId, {
     method: 'DELETE'
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web')
+    res.redirect('/webFase')
   }).catch(error => {
     res.render('index', {respon : 'dato Incorrecto'});
     console.log(error);
@@ -113,4 +112,4 @@ async function eliminar(req, res){
 
 
 
-module.exports = { categorias, crear, obtener, editar, actualizar, elimina, eliminar }
+module.exports = { fases, crear, obtener, editar, actualizar, elimina, eliminar }

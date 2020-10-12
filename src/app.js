@@ -65,6 +65,13 @@ app.get('/',(req, res) => {
     res.render('index');  
 });
 
+//inicio página
+app.get('/inicio',(req, res) => {
+    res.render('inicio');  
+});
+
+
+
 //vista categoria
 const vistaCategoria = require('./routes/web')
 app.use('/web/', vistaCategoria)
@@ -73,9 +80,42 @@ app.use('/web/', vistaCategoria)
 const vistaCliente = require('./routes/webCliente')
 app.use('/webCliente/', vistaCliente)
 
+//vista dirección
+const vistaDireccion = require('./routes/webDireccion')
+app.use('/webDireccion/', vistaDireccion)
 
-//archivos estaticos
-//app.use(express.static('src'));
+//vista dirección
+const vistaEmpleado = require('./routes/webEmpleado')
+app.use('/webEmpleado/', vistaEmpleado)
+
+//vista fase
+const vistaFase = require('./routes/webFase')
+app.use('/webFase/', vistaFase)
+
+//vista motivoGasto
+const vistaMotivoGasto = require('./routes/webMotivoGasto')
+app.use('/webMotivoGasto/', vistaMotivoGasto)
+
+//vista producto
+const vistaProducto = require('./routes/webProducto')
+app.use('/webProducto/', vistaProducto)
+
+//vista proveedores
+const vistaProveedor = require('./routes/webProveedor')
+app.use('/webProveedor/', vistaProveedor)
+
+//vista proveedores
+const vistaTelefono = require('./routes/webTelefono')
+app.use('/webTelefono/', vistaTelefono)
+
+//vista usuarios
+const vistaUsuario = require('./routes/webUsuario')
+app.use('/webUsuario/', vistaUsuario)
+
+
+//vista loginn
+const vistaInicio = require('./routes/webUsuario')
+app.use('/login/', vistaInicio)
 
 //Inicializando servidor
 app.listen(app.get('port'), () => {

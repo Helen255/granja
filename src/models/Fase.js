@@ -40,7 +40,7 @@ Fase.getList = result => {
 
 //petición get por id
 Fase.findById = (faseId, result) => {
-    conexion.query(`SELECT * FROM fase WHERE id = ${faseId}`, (err, res) => {
+    conexion.query(`SELECT * FROM fases WHERE id = ${faseId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);

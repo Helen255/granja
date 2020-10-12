@@ -1,0 +1,42 @@
+@layout('layouts.app')
+ @section('content')
+ <br><br>
+ <h1 class="display-4 text-center">Crear Productos</h1>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+    
+        
+        <div class="box">
+          <form action="/webProducto/" method="POST" >
+            <div class="form-group">
+              <label>Código</label>
+              <input class= " rounded-pill form-control border border-primary" name="codigo" placeholder="codigo">
+            </div>
+            <div class="form-group">
+              <label>Precio</label>
+              <input class="rounded-pill form-control border border-primary" name="precio" placeholder="precio">
+            </div>
+            <label>Stock</label>
+              <input class="rounded-pill form-control border border-primary" name="stock" placeholder="stock">
+            </div>
+            <div class="form-group">
+              <label>Estado</label>
+              <input class="rounded-pill form-control border border-primary" name="activo" placeholder="estado">
+            </div>
+            <div class="form-group">
+              <label>Categoria</label>
+              <input class="rounded-pill form-control border border-primary" name="categoria_id" placeholder=categoria>
+            </div>
+            <div class="row mt-5 form-group row">
+              <div class="col-3 offset-9">
+                <button type="submit" class="btn btn-warning text-right rounded-pill text-right">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+@endsection
+    

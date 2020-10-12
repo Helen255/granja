@@ -1,0 +1,19 @@
+@layout('layouts.app')
+ @section('content')
+ <h1 class="display-4 text-center">Actualizar Datos</h1>
+    <div class="container">
+        <div class="box">
+            <form action="/webMotivoGasto/actualizar/ {{ data.id }}" method="POST" >
+             <div class="form-group">
+               <label>Tipo Gasto</label>
+             <input class= " rounded-pill form-control" value="{{data.tipo_gasto}}" name="tipo_gasto" >
+             </div>
+             <button class="btn btn-primary" value="enviar">Actualizar</button>
+            </form>
+        </div> 
+    </div>
+@endsection
+    
+
+
+

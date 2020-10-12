@@ -1,0 +1,32 @@
+@layout('layouts.app')
+ @section('content')
+ <h1 class="display-4 text-center">Eliminar Datos Empelados</h1>
+    <div class="container">
+        <div class="box">
+            <form action="/webEmpleado/eliminar/ {{ data.id }}" method="POST" >
+             <div class="form-group">
+                <label>Nombre</label>
+                <input class= " rounded-pill form-control" value="{{data.nombre}}" name="nombre" >
+             </div>
+                
+             <div class="form-group">
+               <label>Dpi</label>
+             <input class= " rounded-pill form-control" value="{{data.dpi}}" name="dpi" >
+             </div>
+             <div class="form-group">
+               <label>Puesto</label>
+             <input class="rounded-pill form-control"  value="{{data.puesto}}" name="puesto">
+             </div>
+             <div class="form-group">
+                <label>Usuario</label>
+              <input class="rounded-pill form-control"  value="{{data.usuario_id}}" name="puesto">
+              </div>
+             <button class="btn btn-primary" value="enviar">Eliminar</button>
+            </form>
+        </div> 
+    </div>
+@endsection
+    
+
+
+

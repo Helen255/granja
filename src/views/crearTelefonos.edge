@@ -1,0 +1,39 @@
+@layout('layouts.app')
+ @section('content')
+ <br><br>
+ <h1 class="display-4 text-center">Crear Agenda Telefonica</h1>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+    
+        
+        <div class="box">
+          <form action="/webTelefono/" method="POST" >
+            <div class="form-group">
+              <label>Telefono</label>
+              <input class= " rounded-pill form-control border border-primary" name="telefono" placeholder="telefono">
+            </div>
+            <div class="form-group">
+              <label>Empleados</label>
+              <input class="rounded-pill form-control border border-primary" name="empleado_id" placeholder="empleado">
+            </div>
+            <div class="form-group">
+              <label>Clientes</label>
+              <input class="rounded-pill form-control border border-primary" name="cliente_id" placeholder="cliente">
+            </div>
+            <div class="form-group">
+              <label>Proveedores</label>
+              <input class="rounded-pill form-control border border-primary" name="proveedores_id" placeholder="proveedores_id">
+            </div>
+            <div class="row mt-5 form-group row">
+              <div class="col-3 offset-9">
+                <button type="submit" class="btn btn-warning text-right rounded-pill text-right">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+@endsection
+    

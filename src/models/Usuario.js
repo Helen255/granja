@@ -1,8 +1,10 @@
 const { query } = require('express');
 const conexion = require('../db');
-
+const bcrypt = require('bcrypt');
+const mongoose =require('mongoose');
+const Schema = mongoose.Schema;
 //metodo constructor
-const Usuario = function (usuario) {
+const Usuario= function (usuario) {
     this.id = usuario.id;
     this.usuario = usuario.usuario;
     this.contrasenia = usuario.contrasenia;
@@ -83,4 +85,38 @@ Usuario.removeId = (id, result) => {
     });
 };
 
-module.exports = Usuario;
+//encriptacion
+/*userSchema.pre('save', function(next){
+    bcrypt.genSalt(10).then(salts =>{
+        bcrypt.hash(this.contrasenia, salts).then(hash => {
+            this.contrasenia = hash;
+            next();
+        }).catch(error => next(error));
+    }).catch(error => next(error));
+
+});
+    User = mongoose.models('Usuario', userSchema);*/
+/*otra forma
+const usuarioSchema = new Schema({
+
+})
+
+usuarioSchema.pre('save', function(next) {
+    const usuario = this;
+    if(!usuario.isDirectModified('contrasenia')){
+      return next();  
+    }
+    bcrypt.genSalt(10, (err, salt) =>{
+        if(err);{
+            next(err);
+        }
+        bcrypt.hash(usuario.contrasenia, salt, null, (err, hash) => {
+            if (err) {
+                next(err);
+            }
+            usuario.contrasenia = hash;
+            next();
+        })
+    })
+})*/
+module.exports = Usuario; 

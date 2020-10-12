@@ -1,0 +1,19 @@
+@layout('layouts.app')
+ @section('content')
+ <h1 class="display-4 text-center">Eliminar Datos Fases</h1>
+    <div class="container">
+        <div class="box">
+            <form action="/webFase/eliminar/ {{ data.id }}" method="POST" >
+             <div class="form-group">
+                <label>Número Fase</label>
+                <input class= " rounded-pill form-control" value="{{data.numero_fase}}" name="numero_fase" >
+             </div>
+             <button class="btn btn-primary" value="enviar">Eliminar</button>
+            </form>
+        </div> 
+    </div>
+@endsection
+    
+
+
+

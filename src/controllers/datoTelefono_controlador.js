@@ -1,15 +1,15 @@
 const { json } = require('express');
 const fetch = require('node-fetch');
-const Categorias = require('../models/Categoria');
+const Telefono = require('../models/Telefono');
 
 
-async function categorias(req, res) {
-  let url = 'http://localhost:3000/categoria';
+async function telefonos(req, res) {
+  let url = 'http://localhost:3000/telefono';
 
   await fetch(url)
     .then(res => res.json())
     .then(data => {
-      res.render('categorias', { data });
+      res.render('telefonos', { data });
     }).catch(err => {
       console.log(error);
 
@@ -17,17 +17,20 @@ async function categorias(req, res) {
 }
 
 function obtener(req, res) {
-  res.render('crear');
+  res.render('crearTelefonos');
 }
 async function crear(req, res) {
   let data = await req.body;
   const body = {
     'id': data.id,
-    'nombre': data.nombre,
-    'descripcion': data.descripcion
+    'telefono': data.telefono,
+    'empleado_id': data.empleado_id,
+    'cliente_id': data.cliente_id,
+    'proveedores_id': data.proveedores_id
+    
   };
   console.log(body);
-  await fetch('http://localhost:3000/categoria', {
+  await fetch('http://localhost:3000/telefono', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -36,7 +39,7 @@ async function crear(req, res) {
   })
     .then(res => res.json())
     .then(json => {
-      res.redirect('/web/');
+      res.redirect('/webTelefono/');
     })
     .catch(error => {
       res.render('index', { respon: 'dato incorrecto' });
@@ -45,12 +48,13 @@ async function crear(req, res) {
 }
 
 async function editar(req, res) {
-  let idcategoria = req.params.categoriaId;
+  let idtelefono = req.params.telefonoId;
 
- await fetch('http://localhost:3000/categoria/' + idcategoria)
+ await fetch('http://localhost:3000/telefono/' + idtelefono)
     .then(res => res.json())
     .then(data => {
-      res.render('actualizar', { data })
+      //ruta vista
+      res.render('actualizarTelefonos', { data })
       console.log(data)
     }).catch(err => {
       console.log(err);
@@ -58,22 +62,24 @@ async function editar(req, res) {
 }
 
 async function actualizar(req, res) {
-  let categoria = req.body;
-  let idcategoria = req.params.categoriaId;
+  let telefono = req.body;
+  let idtelefono = req.params.telefonoId;
   const body = {
-    'id': categoria.id,
-    'nombre': categoria.nombre,
-    'descripcion': categoria.descripcion
+    'id': telefono.id,
+    'telefono': telefono.telefono,
+    'empleado_id': telefono.empleado_id,
+    'cliente_id': telefono.cliente_id,
+    'proveedores_id': telefono.proveedores_id
   };
 
-  await fetch('http://localhost:3000/categoria/' + idcategoria, {
+  await fetch('http://localhost:3000/telefono/' + idtelefono, {
     method: 'put',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body)
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web');
+    res.redirect('/webTelefono');
   })
   .catch(error => {
     res.render('index', { respon: 'dato incorrecto' });
@@ -83,26 +89,26 @@ async function actualizar(req, res) {
 
 
 function elimina(req, res){
-  let idcategoria = req.params.categoriaId;
-  let url = "http://localhost:3000/categoria/"+idcategoria ;
+  let idtelefono = req.params.telefonoId;
+  let url = "http://localhost:3000/telefono/"+idtelefono;
 
       fetch(url)
       .then(res => res.json())
       .then(data => {
-             res.render('eliminar',{data})
+             res.render('eliminarTelefonos',{data})
       }).catch(err =>{
       console.log(error);     
   });
 }
 
 async function eliminar(req, res){
-  let categoriaId = req.params.categoriaId;
- await fetch('http://localhost:3000/categoria/'+categoriaId, {
+  let telefonoId = req.params.telefonoId;
+ await fetch('http://localhost:3000/telefono/'+telefonoId, {
     method: 'DELETE'
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web')
+    res.redirect('/webTelefono')
   }).catch(error => {
     res.render('index', {respon : 'dato Incorrecto'});
     console.log(error);
@@ -113,4 +119,4 @@ async function eliminar(req, res){
 
 
 
-module.exports = { categorias, crear, obtener, editar, actualizar, elimina, eliminar }
+module.exports = { telefonos, crear, obtener, editar, actualizar, elimina, eliminar }

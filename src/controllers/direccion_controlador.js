@@ -28,7 +28,7 @@ exports.list = (req, res) => {
 
 //petición get por id
 exports.findById = (req, res) => {
-    Cliente.findById(req.params.clienteId, (err, data) => {
+    Direccion.findById(req.params.direccionId, (err, data) => {
       if (err) {
       } else res.send(data);
     });

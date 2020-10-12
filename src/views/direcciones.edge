@@ -1,0 +1,49 @@
+@layout('layouts.app')
+ @section('content')
+  
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-3 offset-9">
+        <a href="/webDireccion/recibir" class="btn btn-primary text-right">Ingresar</a>
+      </div>
+
+    </div>
+    <div class="box">
+     <h1 class="display-4 text-center">Direcciones</h1>
+
+      <table class="table table-sm">
+        <thead class="text-dark border border-info">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Clientes</th>
+            <th scope="col">Empleados</th>
+          </tr>
+        </thead>
+        <tbody>
+          @each(so in data)
+          <tr>
+            <td>{{so.id}}</td>
+            <td>{{so.direccion}}</td>
+            <td>{{so.cliente_id}}</td>
+            <td>{{so.empleado_id}}</td>
+            
+            <td>
+              <div class="field is-grouped">
+                <div> 
+                  <a href="/webDireccion/editar/{{so.id}}"  class="btn btn-warning text-right">Editar</a>
+                  <a href="/webDireccion/elimina/{{so.id}}"  class="btn btn-danger text-right">Eliminar</a>
+                  <a href="/web/detalle/{{so.id}}"  class="btn btn-success text-right">Detalle</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          @endeach
+        </tbody>
+      </table>
+    </div>  
+  </div>
+@endsection
+    
+    
+

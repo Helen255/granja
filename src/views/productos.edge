@@ -1,0 +1,52 @@
+@layout('layouts.app')
+ @section('content')
+  
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-3 offset-9">
+        <a href="/webProducto/recibir" class="btn btn-primary text-right">Ingresar</a>
+      </div>
+
+    </div>
+    <div class="box">
+     <h1 class="display-4 text-center">Productos</h1>
+
+      <table class="table table-sm">
+        <thead class="text-dark border border-info">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Código</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Categoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          @each(so in data)
+          <tr>
+            <td>{{so.id}}</td>
+            <td>{{so.codigo}}</td>
+            <td>{{so.precio}}</td>
+            <td>{{so.stock}}</td>
+            <td>{{so.activo}}</td>
+            <td>{{so.categoria_id}}</td>
+            <td>
+              <div class="field is-grouped">
+                <div> 
+                  <a href="/webProducto/editar/{{so.id}}"  class="btn btn-warning text-right">Editar</a>
+                  <a href="/webProducto/elimina/{{so.id}}"  class="btn btn-danger text-right">Eliminar</a>
+                  <a href="/webProducto/detalle/{{so.id}}"  class="btn btn-success text-right">Detalle</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          @endeach
+        </tbody>
+      </table>
+    </div>  
+  </div>
+@endsection
+    
+    
+

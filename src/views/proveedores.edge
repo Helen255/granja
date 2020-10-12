@@ -1,0 +1,50 @@
+@layout('layouts.app')
+ @section('content')
+  
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-3 offset-9">
+        <a href="/webProveedor/recibir" class="btn btn-primary text-right">Ingresar</a>
+      </div>
+
+    </div>
+    <div class="box">
+     <h1 class="display-4 text-center">Proveedores</h1>
+
+      <table class="table table-sm">
+        <thead class="text-dark border border-info">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Compras</th>
+          </tr>
+        </thead>
+        <tbody>
+          @each(so in data)
+          <tr>
+            <td>{{so.id}}</td>
+            <td>{{so.nombre}}</td>
+            <td>{{so.empresa}}</td>
+            <td>{{so.compras_id}}</td>
+            
+            
+            <td>
+              <div class="field is-grouped">
+                <div> 
+                  <a href="/webProveedor/editar/{{so.id}}"  class="btn btn-warning text-right">Editar</a>
+                  <a href="/webProveedor/elimina/{{so.id}}"  class="btn btn-danger text-right">Eliminar</a>
+                  <a href="/web/detalle/{{so.id}}"  class="btn btn-success text-right">Detalle</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          @endeach
+        </tbody>
+      </table>
+    </div>  
+  </div>
+@endsection
+    
+    
+

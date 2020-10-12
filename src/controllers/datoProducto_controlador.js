@@ -1,15 +1,15 @@
 const { json } = require('express');
 const fetch = require('node-fetch');
-const Categorias = require('../models/Categoria');
+const producto = require('../models/Producto');
 
 
-async function categorias(req, res) {
-  let url = 'http://localhost:3000/categoria';
+async function productos(req, res) {
+  let url = 'http://localhost:3000/producto';
 
   await fetch(url)
     .then(res => res.json())
     .then(data => {
-      res.render('categorias', { data });
+      res.render('productos', { data });
     }).catch(err => {
       console.log(error);
 
@@ -17,17 +17,20 @@ async function categorias(req, res) {
 }
 
 function obtener(req, res) {
-  res.render('crear');
+  res.render('crearProductos');
 }
 async function crear(req, res) {
   let data = await req.body;
   const body = {
     'id': data.id,
-    'nombre': data.nombre,
-    'descripcion': data.descripcion
+    'codigo': data.codigo,
+    'precio': data.precio,
+    'stock': data.stock,
+    'activo': data.activo,
+    'categoria_id': data.categoria_id
   };
   console.log(body);
-  await fetch('http://localhost:3000/categoria', {
+  await fetch('http://localhost:3000/producto', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -36,7 +39,7 @@ async function crear(req, res) {
   })
     .then(res => res.json())
     .then(json => {
-      res.redirect('/web/');
+      res.redirect('/webProducto/');
     })
     .catch(error => {
       res.render('index', { respon: 'dato incorrecto' });
@@ -45,12 +48,13 @@ async function crear(req, res) {
 }
 
 async function editar(req, res) {
-  let idcategoria = req.params.categoriaId;
+  let idproducto = req.params.productoId;
 
- await fetch('http://localhost:3000/categoria/' + idcategoria)
+ await fetch('http://localhost:3000/producto/' + idproducto)
     .then(res => res.json())
     .then(data => {
-      res.render('actualizar', { data })
+      //ruta vista
+      res.render('actualizarProductos', { data })
       console.log(data)
     }).catch(err => {
       console.log(err);
@@ -58,22 +62,25 @@ async function editar(req, res) {
 }
 
 async function actualizar(req, res) {
-  let categoria = req.body;
-  let idcategoria = req.params.categoriaId;
+  let producto = req.body;
+  let idproducto = req.params.productoId;
   const body = {
-    'id': categoria.id,
-    'nombre': categoria.nombre,
-    'descripcion': categoria.descripcion
+    'id': producto.id,
+    'codigo': producto.codigo,
+    'precio': producto.precio,
+    'stock': producto.stock,
+    'activo': producto.activo,
+    'categoria_id': producto.categoria_id
   };
 
-  await fetch('http://localhost:3000/categoria/' + idcategoria, {
+  await fetch('http://localhost:3000/producto/' + idproducto, {
     method: 'put',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body)
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web');
+    res.redirect('/webProducto');
   })
   .catch(error => {
     res.render('index', { respon: 'dato incorrecto' });
@@ -83,26 +90,26 @@ async function actualizar(req, res) {
 
 
 function elimina(req, res){
-  let idcategoria = req.params.categoriaId;
-  let url = "http://localhost:3000/categoria/"+idcategoria ;
+  let idproducto = req.params.productoId;
+  let url = "http://localhost:3000/producto/"+idproducto ;
 
       fetch(url)
       .then(res => res.json())
       .then(data => {
-             res.render('eliminar',{data})
+             res.render('eliminarProductos',{data})
       }).catch(err =>{
       console.log(error);     
   });
 }
 
 async function eliminar(req, res){
-  let categoriaId = req.params.categoriaId;
- await fetch('http://localhost:3000/categoria/'+categoriaId, {
+  let productoId = req.params.productoId;
+ await fetch('http://localhost:3000/producto/'+productoId, {
     method: 'DELETE'
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web')
+    res.redirect('/webProducto')
   }).catch(error => {
     res.render('index', {respon : 'dato Incorrecto'});
     console.log(error);
@@ -113,4 +120,4 @@ async function eliminar(req, res){
 
 
 
-module.exports = { categorias, crear, obtener, editar, actualizar, elimina, eliminar }
+module.exports = { productos, crear, obtener, editar, actualizar, elimina, eliminar }

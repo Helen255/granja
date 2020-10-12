@@ -1,0 +1,28 @@
+@layout('layouts.app')
+ @section('content')
+ <h1 class="display-4 text-center">Eliminar Datos Direcciones</h1>
+    <div class="container">
+        <div class="box">
+            <form action="/webDireccion/eliminar/ {{ data.id }}" method="POST" >
+             <div class="form-group">
+                <label>Direción</label>
+                <input class= " rounded-pill form-control" value="{{data.direccion}}" name="direccion" >
+             </div>
+                
+             <div class="form-group">
+               <label>Cliente</label>
+             <input class= " rounded-pill form-control" value="{{data.cliente_id}}" name="cliente_id" >
+             </div>
+             <div class="form-group">
+               <label>Empleado</label>
+             <input class="rounded-pill form-control"  value="{{data.empleado_id}}" name="empleado_id">
+             </div>
+             <button class="btn btn-primary" value="enviar">Eliminar</button>
+            </form>
+        </div> 
+    </div>
+@endsection
+    
+
+
+

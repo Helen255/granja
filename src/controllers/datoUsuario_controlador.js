@@ -1,15 +1,15 @@
 const { json } = require('express');
 const fetch = require('node-fetch');
-const Categorias = require('../models/Categoria');
+const Telefono = require('../models/Usuario');
 
 
-async function categorias(req, res) {
-  let url = 'http://localhost:3000/categoria';
+async function usuarios(req, res) {
+  let url = 'http://localhost:3000/usuario';
 
   await fetch(url)
     .then(res => res.json())
     .then(data => {
-      res.render('categorias', { data });
+      res.render('usuarios', { data });
     }).catch(err => {
       console.log(error);
 
@@ -17,17 +17,18 @@ async function categorias(req, res) {
 }
 
 function obtener(req, res) {
-  res.render('crear');
+  res.render('crearUsuarios');
 }
 async function crear(req, res) {
   let data = await req.body;
   const body = {
     'id': data.id,
-    'nombre': data.nombre,
-    'descripcion': data.descripcion
+    'usuario': data.usuario,
+    'contrasenia': data.contrasenia
+    
   };
   console.log(body);
-  await fetch('http://localhost:3000/categoria', {
+  await fetch('http://localhost:3000/usuario', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -36,7 +37,7 @@ async function crear(req, res) {
   })
     .then(res => res.json())
     .then(json => {
-      res.redirect('/web/');
+      res.redirect('/webUsuario/');
     })
     .catch(error => {
       res.render('index', { respon: 'dato incorrecto' });
@@ -45,12 +46,13 @@ async function crear(req, res) {
 }
 
 async function editar(req, res) {
-  let idcategoria = req.params.categoriaId;
+  let idusuario = req.params.usuarioId;
 
- await fetch('http://localhost:3000/categoria/' + idcategoria)
+ await fetch('http://localhost:3000/usuario/' + idusuario)
     .then(res => res.json())
     .then(data => {
-      res.render('actualizar', { data })
+      //ruta vista
+      res.render('actualizarUsuarios', { data })
       console.log(data)
     }).catch(err => {
       console.log(err);
@@ -58,22 +60,22 @@ async function editar(req, res) {
 }
 
 async function actualizar(req, res) {
-  let categoria = req.body;
-  let idcategoria = req.params.categoriaId;
+  let usuario = req.body;
+  let idusuario = req.params.usuarioId;
   const body = {
-    'id': categoria.id,
-    'nombre': categoria.nombre,
-    'descripcion': categoria.descripcion
+    'id': usuario.id,
+    'usuario': usuario.usuario,
+    'contrsenia': usuario.contrasenia,
   };
 
-  await fetch('http://localhost:3000/categoria/' + idcategoria, {
+  await fetch('http://localhost:3000/usuario/' + idusuario, {
     method: 'put',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body)
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web');
+    res.redirect('/webUsuario');
   })
   .catch(error => {
     res.render('index', { respon: 'dato incorrecto' });
@@ -83,26 +85,26 @@ async function actualizar(req, res) {
 
 
 function elimina(req, res){
-  let idcategoria = req.params.categoriaId;
-  let url = "http://localhost:3000/categoria/"+idcategoria ;
+  let idusuario = req.params.usuarioId;
+  let url = "http://localhost:3000/usuario/"+idusuario;
 
       fetch(url)
       .then(res => res.json())
       .then(data => {
-             res.render('eliminar',{data})
+             res.render('eliminarUsuarios',{data})
       }).catch(err =>{
       console.log(error);     
   });
 }
 
 async function eliminar(req, res){
-  let categoriaId = req.params.categoriaId;
- await fetch('http://localhost:3000/categoria/'+categoriaId, {
+  let usuarioId = req.params.usuarioId;
+ await fetch('http://localhost:3000/usuario/'+usuarioId, {
     method: 'DELETE'
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web')
+    res.redirect('/webUsuario')
   }).catch(error => {
     res.render('index', {respon : 'dato Incorrecto'});
     console.log(error);
@@ -113,4 +115,4 @@ async function eliminar(req, res){
 
 
 
-module.exports = { categorias, crear, obtener, editar, actualizar, elimina, eliminar }
+module.exports = { usuarios, crear, obtener, editar, actualizar, elimina, eliminar }

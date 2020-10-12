@@ -1,0 +1,35 @@
+@layout('layouts.app')
+ @section('content')
+ <h1 class="display-4 text-center">Actualizar Datos</h1>
+    <div class="container">
+        <div class="box">
+            <form action="/webProducto/actualizar/ {{ data.id }}" method="POST" >
+             <div class="form-group">
+               <label>Código</label>
+             <input class= " rounded-pill form-control" value="{{data.codigo}}" name="codigo" >
+             </div>
+             <div class="form-group">
+                <label>Precio</label>
+              <input class= " rounded-pill form-control" value="{{data.precio}}" name="precio" >
+              </div>
+              <div class="form-group">
+                <label>Stock</label>
+              <input class= " rounded-pill form-control" value="{{data.stock}}" name="stock" >
+              </div>
+             <div class="form-group">
+               <label>Estado</label>
+             <input class="rounded-pill form-control"  value="{{data.activo}}" name="activo">
+             </div>
+             <div class="form-group">
+                <label>Categoria</label>
+              <input class="rounded-pill form-control"  value="{{data.categoria_id}}" name="categoria_id">
+              </div>
+             <button class="btn btn-primary" value="enviar">Actualizar</button>
+            </form>
+        </div> 
+    </div>
+@endsection
+    
+
+
+

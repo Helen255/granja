@@ -1,15 +1,15 @@
 const { json } = require('express');
 const fetch = require('node-fetch');
-const Categorias = require('../models/Categoria');
+const Empleados = require('../models/Empleado');
 
 
-async function categorias(req, res) {
-  let url = 'http://localhost:3000/categoria';
+async function empleados(req, res) {
+  let url = 'http://localhost:3000/empleado';
 
   await fetch(url)
     .then(res => res.json())
     .then(data => {
-      res.render('categorias', { data });
+      res.render('empleados', { data });
     }).catch(err => {
       console.log(error);
 
@@ -17,17 +17,19 @@ async function categorias(req, res) {
 }
 
 function obtener(req, res) {
-  res.render('crear');
+  res.render('crearEmpleados');
 }
 async function crear(req, res) {
   let data = await req.body;
   const body = {
     'id': data.id,
+    'dpi': data.dpi,
+    'puesto': data.puesto,
     'nombre': data.nombre,
-    'descripcion': data.descripcion
+    'usuario_id': data.usuario_id
   };
   console.log(body);
-  await fetch('http://localhost:3000/categoria', {
+  await fetch('http://localhost:3000/empleado', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -36,7 +38,7 @@ async function crear(req, res) {
   })
     .then(res => res.json())
     .then(json => {
-      res.redirect('/web/');
+      res.redirect('/webEmpleado/');
     })
     .catch(error => {
       res.render('index', { respon: 'dato incorrecto' });
@@ -45,12 +47,13 @@ async function crear(req, res) {
 }
 
 async function editar(req, res) {
-  let idcategoria = req.params.categoriaId;
+  let idempleado = req.params.empleadoId;
 
- await fetch('http://localhost:3000/categoria/' + idcategoria)
+ await fetch('http://localhost:3000/empleado/' + idempleado)
     .then(res => res.json())
     .then(data => {
-      res.render('actualizar', { data })
+      //ruta vista
+      res.render('actualizarEmpleados', { data })
       console.log(data)
     }).catch(err => {
       console.log(err);
@@ -58,22 +61,24 @@ async function editar(req, res) {
 }
 
 async function actualizar(req, res) {
-  let categoria = req.body;
-  let idcategoria = req.params.categoriaId;
+  let empleado = req.body;
+  let idempleado = req.params.empleadoId;
   const body = {
-    'id': categoria.id,
-    'nombre': categoria.nombre,
-    'descripcion': categoria.descripcion
+    'id': empleado.id,
+    'dpi': empleado.dpi,
+    'puesto': empleado.puesto,
+    'nombre': empleado.nombre,
+    'usuario_id': empleado.usuario_id
   };
 
-  await fetch('http://localhost:3000/categoria/' + idcategoria, {
+  await fetch('http://localhost:3000/empleado/' + idempleado, {
     method: 'put',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body)
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web');
+    res.redirect('/webEmpleado');
   })
   .catch(error => {
     res.render('index', { respon: 'dato incorrecto' });
@@ -83,26 +88,26 @@ async function actualizar(req, res) {
 
 
 function elimina(req, res){
-  let idcategoria = req.params.categoriaId;
-  let url = "http://localhost:3000/categoria/"+idcategoria ;
+  let idempleado = req.params.empleadoId;
+  let url = "http://localhost:3000/empleado/"+idempleado ;
 
       fetch(url)
       .then(res => res.json())
       .then(data => {
-             res.render('eliminar',{data})
+             res.render('eliminarEmpleados',{data})
       }).catch(err =>{
       console.log(error);     
   });
 }
 
 async function eliminar(req, res){
-  let categoriaId = req.params.categoriaId;
- await fetch('http://localhost:3000/categoria/'+categoriaId, {
+  let empleadoId = req.params.empleadoId;
+ await fetch('http://localhost:3000/empleado/'+empleadoId, {
     method: 'DELETE'
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web')
+    res.redirect('/webEmpleado')
   }).catch(error => {
     res.render('index', {respon : 'dato Incorrecto'});
     console.log(error);
@@ -113,4 +118,4 @@ async function eliminar(req, res){
 
 
 
-module.exports = { categorias, crear, obtener, editar, actualizar, elimina, eliminar }
+module.exports = { empleados, crear, obtener, editar, actualizar, elimina, eliminar }

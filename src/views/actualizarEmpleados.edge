@@ -1,0 +1,31 @@
+@layout('layouts.app')
+ @section('content')
+ <h1 class="display-4 text-center">Actualizar Datos</h1>
+    <div class="container">
+        <div class="box">
+            <form action="/webEmpleado/actualizar/ {{ data.id }}" method="POST" >
+             <div class="form-group">
+               <label>Nombre</label>
+             <input class= " rounded-pill form-control" value="{{data.nombre}}" name="nombre" >
+             </div>
+             <div class="form-group">
+                <label>Dpi</label>
+              <input class= " rounded-pill form-control" value="{{data.dpi}}" name="dpi" >
+              </div>
+              <div class="form-group">
+                <label>Puesto</label>
+              <input class= " rounded-pill form-control" value="{{data.puesto}}" name="puesto" >
+              </div>
+             <div class="form-group">
+               <label>Usuario</label>
+             <input class="rounded-pill form-control"  value="{{data.usuario_id}}" name="usuario_id">
+             </div>
+             <button class="btn btn-primary" value="enviar">Actualizar</button>
+            </form>
+        </div> 
+    </div>
+@endsection
+    
+
+
+

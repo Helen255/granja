@@ -1,15 +1,15 @@
 const { json } = require('express');
 const fetch = require('node-fetch');
-const Categorias = require('../models/Categoria');
+const Direcciones = require('../models/Direccion');
 
 
-async function categorias(req, res) {
-  let url = 'http://localhost:3000/categoria';
+async function direcciones(req, res) {
+  let url = 'http://localhost:3000/direccion';
 
   await fetch(url)
     .then(res => res.json())
     .then(data => {
-      res.render('categorias', { data });
+      res.render('direcciones', { data });
     }).catch(err => {
       console.log(error);
 
@@ -17,17 +17,18 @@ async function categorias(req, res) {
 }
 
 function obtener(req, res) {
-  res.render('crear');
+  res.render('crearDirecciones');
 }
 async function crear(req, res) {
   let data = await req.body;
   const body = {
     'id': data.id,
-    'nombre': data.nombre,
-    'descripcion': data.descripcion
+    'direccion': data.direccion,
+    'cliente_id': data.cliente_id,
+    'empleado_id': data.empleado_id
   };
   console.log(body);
-  await fetch('http://localhost:3000/categoria', {
+  await fetch('http://localhost:3000/direccion', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -36,7 +37,7 @@ async function crear(req, res) {
   })
     .then(res => res.json())
     .then(json => {
-      res.redirect('/web/');
+      res.redirect('/webDireccion/');
     })
     .catch(error => {
       res.render('index', { respon: 'dato incorrecto' });
@@ -45,12 +46,13 @@ async function crear(req, res) {
 }
 
 async function editar(req, res) {
-  let idcategoria = req.params.categoriaId;
+  let iddireccion = req.params.direccionId;
 
- await fetch('http://localhost:3000/categoria/' + idcategoria)
+ await fetch('http://localhost:3000/direccion/' + iddireccion)
     .then(res => res.json())
     .then(data => {
-      res.render('actualizar', { data })
+      //ruta vista
+      res.render('actualizarDirecciones', { data })
       console.log(data)
     }).catch(err => {
       console.log(err);
@@ -58,22 +60,23 @@ async function editar(req, res) {
 }
 
 async function actualizar(req, res) {
-  let categoria = req.body;
-  let idcategoria = req.params.categoriaId;
+  let direccion = req.body;
+  let idDireccion = req.params.direccionId;
   const body = {
-    'id': categoria.id,
-    'nombre': categoria.nombre,
-    'descripcion': categoria.descripcion
+    'id': direccion.id,
+    'direccion': direccion.direccion,
+    'cliente_id': direccion.cliente_id,
+    'empleado_id': direccion.empleado_id
   };
 
-  await fetch('http://localhost:3000/categoria/' + idcategoria, {
+  await fetch('http://localhost:3000/direccion/' + idDireccion, {
     method: 'put',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body)
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web');
+    res.redirect('/webDireccion');
   })
   .catch(error => {
     res.render('index', { respon: 'dato incorrecto' });
@@ -83,26 +86,26 @@ async function actualizar(req, res) {
 
 
 function elimina(req, res){
-  let idcategoria = req.params.categoriaId;
-  let url = "http://localhost:3000/categoria/"+idcategoria ;
+  let iddireccion = req.params.direccionId;
+  let url = "http://localhost:3000/direccion/"+iddireccion ;
 
       fetch(url)
       .then(res => res.json())
       .then(data => {
-             res.render('eliminar',{data})
+             res.render('eliminarDirecciones',{data})
       }).catch(err =>{
       console.log(error);     
   });
 }
 
 async function eliminar(req, res){
-  let categoriaId = req.params.categoriaId;
- await fetch('http://localhost:3000/categoria/'+categoriaId, {
+  let direccionId = req.params.direccionId;
+ await fetch('http://localhost:3000/direccion/'+direccionId, {
     method: 'DELETE'
   })
   .then(res => res.json())
   .then(json => {
-    res.redirect('/web')
+    res.redirect('/webDireccion')
   }).catch(error => {
     res.render('index', {respon : 'dato Incorrecto'});
     console.log(error);
@@ -113,4 +116,4 @@ async function eliminar(req, res){
 
 
 
-module.exports = { categorias, crear, obtener, editar, actualizar, elimina, eliminar }
+module.exports = { direcciones, crear, obtener, editar, actualizar, elimina, eliminar }

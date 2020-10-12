@@ -1,0 +1,35 @@
+@layout('layouts.app')
+ @section('content')
+ <br><br>
+ <h1 class="display-4 text-center">Crear Proveedores</h1>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+    
+        
+        <div class="box">
+          <form action="/webProveedor/" method="POST" >
+            <div class="form-group">
+              <label>Nombre</label>
+              <input class= " rounded-pill form-control border border-primary" name="nombre" placeholder="nombre">
+            </div>
+            <div class="form-group">
+                <label>Empresa</label>
+                <input class= " rounded-pill form-control border border-primary" name="empresa" placeholder="empresa">
+              </div>
+              <div class="form-group">
+                <label>Compras</label>
+                <input class= " rounded-pill form-control border border-primary" name="compras_id" placeholder="compras">
+              </div>
+              <div class="row mt-5 form-group row">
+                <div class="col-3 offset-9">
+                  <button type="submit" class="btn btn-warning text-right rounded-pill text-right">Guardar</button>
+                </div>
+              </div>
+          </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+@endsection
+    
