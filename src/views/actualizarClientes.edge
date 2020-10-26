@@ -1,6 +1,6 @@
 @layout('layouts.app')
  @section('content')
- <h1 class="display-4 text-center">Actualizar Datossss</h1>
+ <h1 class="display-4 text-center">Actualizar Datos del Cliente</h1>
     <div class="container">
         <div class="box">
             <form action="/webCliente/actualizar/ {{ data.id }}" method="POST" >
@@ -12,7 +12,7 @@
                <label>Empresa</label>
              <input class="rounded-pill form-control"  value="{{data.empresa}}" name="empresa">
              </div>
-             <button class="btn btn-primary" value="enviar">Actualizar</button>
+             <button class="btn btn-success" value="enviar">Actualizar</button>
             </form>
         </div> 
     </div>

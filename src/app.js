@@ -1,13 +1,17 @@
 const { response } = require('express');
 const express = require('express');
 const app = express();
-const { config, engine } = require ('express-edge');
+const { config, engine } = require('express-edge');
 const path = require('path');
 const mysqlConnection = require('../src/db');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+app.use(cors());
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended : true,
+    extended: true,
 }));
 
 
@@ -22,52 +26,57 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.json());
 
 //Rutas api
-const categoria = require ('../src/routes/categoria_ruta.js');
+const categoria = require('../src/routes/categoria_ruta.js');
 app.use('/categoria/', categoria);
 
-const cliente = require ('../src/routes/cliente_ruta.js');
+const cliente = require('../src/routes/cliente_ruta.js');
 app.use('/cliente/', cliente);
 
-const compra = require ('../src/routes/compra_ruta.js');
+const compra = require('../src/routes/compra_ruta.js');
 app.use('/compra/', compra);
 
-const direccion = require ('../src/routes/direccion_ruta.js');
+const direccion = require('../src/routes/direccion_ruta.js');
 app.use('/direccion/', direccion);
 
-const empleado = require ('../src/routes/empleado_ruta.js');
+const empleado = require('../src/routes/empleado_ruta.js');
 app.use('/empleado/', empleado);
 
-const fase = require ('../src/routes/fase_ruta.js');
+const fase = require('../src/routes/fase_ruta.js');
 app.use('/fase/', fase);
 
-const motivoGasto = require ('../src/routes/motivoGasto_ruta.js');
+const motivoGasto = require('../src/routes/motivoGasto_ruta.js');
 app.use('/motivoGasto/', motivoGasto);
 
-const producto = require ('../src/routes/producto_ruta.js');
+const producto = require('../src/routes/producto_ruta.js');
 app.use('/producto/', producto);
 
-const proveedor = require ('../src/routes/proveedor_ruta.js');
+const proveedor = require('../src/routes/proveedor_ruta.js');
 app.use('/proveedor/', proveedor);
 
-const telefono = require ('../src/routes/telefono_ruta.js');
+const telefono = require('../src/routes/telefono_ruta.js');
 app.use('/telefono/', telefono);
 
-const usuario = require ('../src/routes/usuario_ruta.js');
+const usuario = require('../src/routes/usuario_ruta.js');
 app.use('/usuario/', usuario);
 
+const venta = require('../src/routes/venta_ruta.js');
+app.use('/venta/', venta);
+
+const detalleVenta = require('../src/routes/detalleVenta_ruta.js');
+app.use('/detalleVenta/', detalleVenta);
 
 //ruta de las vistas usando  motor plantillas edge
 app.use(engine);
 app.set('views', path.join(__dirname, 'views'));
 
 //rutas vistas
-app.get('/',(req, res) => {
-    res.render('index');  
+app.get('/', (req, res) => {
+    res.render('index');
 });
 
 //inicio página
-app.get('/inicio',(req, res) => {
-    res.render('inicio');  
+app.get('/inicio', (req, res) => {
+    res.render('inicio');
 });
 
 
@@ -112,6 +121,10 @@ app.use('/webTelefono/', vistaTelefono)
 const vistaUsuario = require('./routes/webUsuario')
 app.use('/webUsuario/', vistaUsuario)
 
+
+//vista ventas
+const vistaVenta = require('./routes/webVenta')
+app.use('/webVenta/', vistaVenta)
 
 //vista loginn
 const vistaInicio = require('./routes/webUsuario')
